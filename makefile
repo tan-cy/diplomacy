@@ -4,16 +4,24 @@ FILES :=                              \
     Diplomacy.html                      \
     Diplomacy.log                       \
     Diplomacy.py                        \
-    RunDiplomacy.in                     \
-    RunDiplomacy.out                    \
+    RunDiplomacy1.in                     \
+    RunDiplomacy1.out                    \
+	RunDiplomacy2.in                     \
+    RunDiplomacy2.out                    \
+	RunDiplomacy3.in                     \
+    RunDiplomacy3.out                    \
+	RunDiplomacy4.in                     \
+    RunDiplomacy4.out                    \
+	RunDiplomacy5.in                     \
+    RunDiplomacy5.out                    \
     RunDiplomacy.py                     \
     TestDiplomacy.out                   \
     TestDiplomacy.py					  \
-	cs330e-Diplomacy-tests/tancy-RunDiplomacy.in   \
-	cs330e-Diplomacy-tests/tancy-RunDiplomacy.out  \
-	cs330e-Diplomacy-tests/tancy-TestDiplomacy.out \
-	cs330e-Diplomacy-tests/tancy-TestDiplomacy.py  \
-	cs330e-Diplomacy-tests/tancy-TestDiplomacy.py  \
+#	cs330e-Diplomacy-tests/tancy-RunDiplomacy.in   \
+#	cs330e-Diplomacy-tests/tancy-RunDiplomacy.out  \
+#	cs330e-Diplomacy-tests/tancy-TestDiplomacy.out \
+#	cs330e-Diplomacy-tests/tancy-TestDiplomacy.py  \
+#	cs330e-Diplomacy-tests/tancy-TestDiplomacy.py  \
 
 
 ifeq ($(shell uname), Darwin)          # Apple
@@ -49,9 +57,25 @@ Diplomacy.html: Diplomacy.py
 Diplomacy.log:
 	git log > Diplomacy.log
 
-RunDiplomacy.tmp: RunDiplomacy.in RunDiplomacy.out RunDiplomacy.py
-	$(PYTHON) RunDiplomacy.py < RunDiplomacy.in > RunDiplomacy.tmp
-	diff --strip-trailing-cr RunDiplomacy.tmp RunDiplomacy.out
+RunDiplomacy1.tmp: RunDiplomacy1.in RunDiplomacy1.out RunDiplomacy.py
+	$(PYTHON) RunDiplomacy.py < RunDiplomacy1.in > RunDiplomacy1.tmp
+	diff --strip-trailing-cr RunDiplomacy1.tmp RunDiplomacy1.out
+	
+RunDiplomacy2.tmp: RunDiplomacy2.in RunDiplomacy2.out RunDiplomacy.py
+	$(PYTHON) RunDiplomacy.py < RunDiplomacy2.in > RunDiplomacy2.tmp
+	diff --strip-trailing-cr RunDiplomacy2.tmp RunDiplomacy2.out
+
+RunDiplomacy3.tmp: RunDiplomacy3.in RunDiplomacy3.out RunDiplomacy.py
+	$(PYTHON) RunDiplomacy.py < RunDiplomacy3.in > RunDiplomacy3.tmp
+	diff --strip-trailing-cr RunDiplomacy3.tmp RunDiplomacy3.out
+	
+RunDiplomacy4.tmp: RunDiplomacy4.in RunDiplomacy4.out RunDiplomacy.py
+	$(PYTHON) RunDiplomacy.py < RunDiplomacy4.in > RunDiplomacy4.tmp
+	diff --strip-trailing-cr RunDiplomacy4.tmp RunDiplomacy4.out
+	
+RunDiplomacy5.tmp: RunDiplomacy5.in RunDiplomacy5.out RunDiplomacy.py
+	$(PYTHON) RunDiplomacy.py < RunDiplomacy5.in > RunDiplomacy5.tmp
+	diff --strip-trailing-cr RunDiplomacy5.tmp RunDiplomacy5.out
 
 TestDiplomacy.tmp: TestDiplomacy.py
 	$(COVERAGE) run    --branch TestDiplomacy.py >  TestDiplomacy.tmp 2>&1
@@ -127,4 +151,4 @@ versions:
 	which        $(PYTHON)
 	$(PYTHON)    --version
 
-test: Diplomacy.html Diplomacy.log RunDiplomacy.tmp TestDiplomacy.tmp Diplomacy-tests check
+test: Diplomacy.html Diplomacy.log RunDiplomacy1.tmp RunDiplomacy2.tmp RunDiplomacy3.tmp RunDiplomacy4.tmp RunDiplomacy5.tmp TestDiplomacy.tmp Diplomacy-tests check
