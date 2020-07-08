@@ -11,10 +11,13 @@ def diplomacy_read(s):
     return a list of 3 string, army name, city name, and action 
     """
     a = s.split()
+    
     try:
-        b = [(a[0]), (a[1]), a([2])]
+        b = [a[0], a[1], a[2]]
+        
         if len(a) == 4:
-            b += (a[3])
+            b.append(a[3])
+            
         return b
     except:
         sys.exit()
@@ -60,3 +63,5 @@ def diplomacy_solve(r, w):
         l = diplomacy_read(s)
         i, j = diplomacy_eval(l)
         diplomacy_print(w, i, j)
+
+
