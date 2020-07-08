@@ -53,6 +53,12 @@ def diplomacy_find_support(l, d):
     return d
 
 # -------------
+# diplomacy_eval
+# -------------
+def diplomacy_eval():
+    pass
+    
+# -------------
 # diplomacy_solve
 # -------------
 

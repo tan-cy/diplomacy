@@ -1,0 +1,55 @@
+commit 1d1ee1bc4b6e508c51d938a1b2c9c4aaab89e80d
+Merge: 04f9e80 7ca05c5
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Wed Jul 8 18:47:14 2020 -0500
+
+    added function to find supporters
+
+commit 7ca05c54b3e05d6d1022b68a73388fc19716c967
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Wed Jul 8 18:40:53 2020 -0500
+
+    added function to find all supporters
+
+commit 04f9e800adff3860ddf0afdb4f6e765cfbec0ee7
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Wed Jul 8 18:26:40 2020 -0500
+
+    created unit tests
+
+commit 124778954f52faca46ccfa0b6703e275a4ed166f
+Merge: f423008 59759fe
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Mon Jul 6 13:19:39 2020 -0500
+
+    Merge branch 'dev' of https://gitlab.com/tancy/diplomacy into dev
+
+commit f423008253ae606f3bd27396eadef4b390e1253c
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Mon Jul 6 13:18:02 2020 -0500
+
+    fixed the template for TestDiplomacy.py
+
+commit 59759fef2ec7237e29fed3b2d3c33dfbb9ef4667
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Mon Jul 6 13:16:12 2020 -0500
+
+    added functions to diplomacy.py
+
+commit 8eae70c54cb6313da3b5d77bf8b2fd906bc1f2c9
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Mon Jul 6 12:57:42 2020 -0500
+
+    fixed makefile to include all acceptance .in files
+
+commit 8cb7bd7650b2bda67cb86b0f49fc1893a6a6f766
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Mon Jul 6 12:49:29 2020 -0500
+
+    template
+
+commit ee5d219828795be60ccc012ab38e5d675ee33e01
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 5 21:37:10 2020 +0000
+
+    Initial commit
