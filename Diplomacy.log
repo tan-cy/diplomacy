@@ -1,3 +1,9 @@
+commit 4ff8dc40bda28fd26cdd8225b4c52e8a6a7cb8ea
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sat Jul 11 16:04:58 2020 -0500
+
+    implementing the simple solution for Diplomacy.py
+
 commit 707e81b46e5ff2071f5e88540c828971ff092442
 Merge: 34a8989 7c750be
 Author: Florencia Froebel <florencia.froebel@gmail.com>

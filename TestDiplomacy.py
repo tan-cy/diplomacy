@@ -10,8 +10,7 @@ from unittest import main, TestCase
 
 from Diplomacy import diplomacy_read, diplomacy_print, diplomacy_solve, \
     diplomacy_eval, diplomacy_find_supported, diplomacy_find_supporters, \
-    diplomacy_find_start, diplomacy_attacked
-
+    diplomacy_compare, diplomacy_find_start, diplomacy_attacked
 
 # --------------
 # TestDiplomacy
@@ -138,30 +137,25 @@ class TestDiplomacy(TestCase):
         r = StringIO("A Madrid Hold\nB London Support A\nC Berlin Support A\nD Austin Support E\nE Houston Move Madrid\n")
         w = StringIO()
         diplomacy_solve(r, w)
-        self.assertEqual(
-            w.getvalue(), "A Madrid\nB London\nC Berlin\nD Austin\nE [dead]\n")
-    
+        self.assertEqual(w.getvalue(), "A Madrid\nB London\nC Berlin\nD Austin\nE [dead]\n")
+            
     def test_solve_2(self):
         r = StringIO("A Madrid Hold\nB Barcelona Move Madrid\nC London Support A\nD Houston Support B\n")
         w = StringIO()
         diplomacy_solve(r, w)
-        self.assertEqual(
-            w.getvalue(), "A [dead]\nB [dead]\nC London\nD Houston\n")
+        self.assertEqual(w.getvalue(), "A [dead]\nB [dead]\nC London\nD Houston\n")
     
     def test_solve_3(self):
         r = StringIO("A Berlin Hold\nB London Move Berlin\nC Austin Move Berlin\nD Barcelona Move Berlin\nE NewYork Support A\n")
         w = StringIO()
         diplomacy_solve(r, w)
-        self.assertEqual(
-            w.getvalue(), "A Berlin\nB [dead]\nC [dead]\nD [dead]\nE NewYork\n")
-    """
+        self.assertEqual(w.getvalue(), "A Berlin\nB [dead]\nC [dead]\nD [dead]\nE NewYork\n")
+    
     def test_solve_4(self):
         r = StringIO("A Madrid Hold\nB London Move Madrid\nC Berlin Support A\nD Austin Move Berlin\nE Houston Support D")
         w = StringIO()
         diplomacy_solve(r, w)
-        self.assertEqual(
-            w.getvalue(), "A [dead]\nB [dead]\nC [dead]\nD Berlin\nE Houston")
-    """
+        self.assertEqual(w.getvalue(), "A [dead]\nB [dead]\nC [dead]\nD Berlin\nE Houston\n")
 
 if __name__ == "__main__":
     main()
