@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+from io import StringIO
 
 # -------------
 # diplomacy_read
@@ -33,13 +34,33 @@ def diplomacy_print(w, i, j):
     j is army's location or [dead]
     """
     w.write(str(i) + " " + str(j) + "\n")
+        
 
 # ----------------------
 # diplomacy_find_support
 # ----------------------
 
 
-def diplomacy_find_support(l, d):
+def diplomacy_find_attacked(l, d, start):
+    """
+    returns a dictionary of army: [list of armies that attacked them]
+    l is a list of strings : ["A", "Barcelona", "Move", "Madrid"]
+    """
+    
+    if l[2] == "Move":
+        army = start.get(l[0])
+        if l[0] in d:
+           d.update({l[3]: d.get(l[3]) + 1})
+        else:
+           d.update({l[3]: 1})
+    return d
+
+# ------------------------
+# diplomacy_find_supported
+# ------------------------
+
+
+def diplomacy_find_supported(l, d):
     """
     returns a dictionary of number of supports for each city 
     l is a list of strings : ["A", "Barcelona", "Move", "Madrid"]
@@ -52,6 +73,23 @@ def diplomacy_find_support(l, d):
            d.update({l[3]: 1})
     return d
 
+# -------------------------
+# diplomacy_find_supporters
+# -------------------------
+
+
+def diplomacy_find_supporters(l, d):
+    """
+    returns a dictionary of supporter : army they are supporting 
+    l is a list of strings : ["A", "Barcelona", "Move", "Madrid"]
+    """
+
+    if l[2] == "Support":
+        if d == {}:
+            d = {l[0]: l[3]}
+        else:
+            d.update({l[0]: l[3]})
+    return d
 # ----------------------
 # diplomacy_find_start
 # ----------------------
@@ -62,37 +100,88 @@ def diplomacy_find_start(l, d):
     returns a updated dictionary of starting city for an army
     l is a list of strings : ["A", "Barcelona", "Move", "Madrid"]
     """
-    return d.update({l[0]:l[1]})
+    if d == {}:
+        d = {l[0]: l[1]}
 
+    else:
+        d.update({l[0]:l[1]})
+
+    return d
+
+# -------------------
+# diplomacy_attacked
+# -------------------
+def diplomacy_attacked(attackers, current):
+
+    attacked = {}
+
+    for attacker in attackers:
+        for city in current:
+           
+            if attackers.get(attacker) == current.get(city):
+                
+                if attacked == {}:
+                    att = [attacker]
+                    attacked = {city: att}
+                    
+                else:
+                    att.append(attacker)
+                    attacked.update({city: att})
+                
+
+    return attacked
+        
 
 # -------------
 # diplomacy_eval
 # -------------
 
 
-def diplomacy_eval(supporters, attackers, start, armies):
+def diplomacy_eval(supported, supporters, attacked, current):
+
     """
     returns a list of outcomes
+    supported is a dictionary {army : army they support}
     supporters is a dictionary {army : # of support}
-    attackers is a dictionary {army : city attacking} 
+    attacked is a dictionary {army : [list of armies attacking them]} 
     l is a list
     """
-    outcome = {}
-    for army in supporters:
-        if army[0] in attackers
-        """
-        if army[2] == "Move":
-            support_attacker = supporters.get(army[0])
-            support_defender = supporters.get(army[3])
-            if support_attacker > support_defender:
-                outcome.update({army[0]: army[3])
-                outcome.update({army[3]: "[dead]")
-            elif support_attacker < support_defender:
-                outcome.update({army[0]: "[dead]")
+    for army in attacked:
+        for att_army in attacked.get(army):
+
+            if (army not in supported) and (att_army not in supported):
+                current.update({army : '[dead]'})
+                current.update({att_army : '[dead]'})
+
+                if army in supporters:
+                    supporters.pop(army)
+                    supported[supporters.get(army)] -= 1
+
+                elif att_army in supporters:
+                    supporters.pop(att_army)
+                    supported[supporters.get(att_army)] -= 1
+
+            elif (army not in supported) and (att_army in supported):
+                current.update({att_army : current.get(army)})
+                current.update({army : '[dead]'})
+
+                if army in supporters:
+                    supporters.pop(army)
+                    supported[supporters.get(army)] -= 1
+
+            elif (army in supported) and (att_army not in supported):
+                current.update({army : current.get(att_army)})
+                current.update({att_army : '[dead]'})
+
+                if att_army in supporters:
+                    supporters.pop(att_army)
+                    supported[supporters.get(att_army)] -= 1
+
             else:
-                outcome.update({army[0]: "[dead]")
-                outcome.update({army[3]: "[dead]")
-        """
+                pass
+
+            
+
 # -------------
 # diplomacy_solve
 # -------------
@@ -103,20 +192,36 @@ def diplomacy_solve(r, w):
     r a reader
     w a writer
     """
+    supported = {}
     supporters = {}
     attackers = {}
-    armies = []
-    start = {}
-    # finds initial moves 
+    current = {}
+    outcome = {}
+
     for s in r:
         l = diplomacy_read(s)
-        supporters = diplomacy_find_support(l, supporters)
-        attackers.update({l[0]:l[3]) # army name : city attacking
-        start = diplomacy_find_start(l, start)
-        armies.append(l)
+        supported = diplomacy_find_supported(l, supported)
+        supporters = diplomacy_find_supporters(l, supporters)
+        current = diplomacy_find_start(l, current)
+
+        if (len(l) > 3) and (l[2] == "Move"):
+            attackers.update({l[0]:l[3]}) # army name : city attacking
+
+        if outcome == {}:
+            outcome = {l[0]:""}
+        else:
+            outcome.update({l[0]:""})
+
+    attacked = diplomacy_attacked(attackers, current)
+
+
+    
     # finds solution after move    
-    solution = diplomacy_eval(supporters, attackers, start, armies)
+    solution = diplomacy_eval(supported, supporters, attacked, current)
         
         
-        #diplomacy_print(w, i, j)
+    diplomacy_print(w, i, j)
+
+
+
     
