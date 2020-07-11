@@ -1,3 +1,22 @@
+commit 707e81b46e5ff2071f5e88540c828971ff092442
+Merge: 34a8989 7c750be
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sat Jul 11 15:38:17 2020 -0500
+
+    Merge branch 'dev' of https://gitlab.com/tancy/diplomacy into dev
+
+commit 34a8989e90dd4a9ee5350df01f53c6601d1bd36d
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sat Jul 11 15:33:04 2020 -0500
+
+    added new function to Diplomacy.py and more tests
+
+commit 7c750be27b767d085bebfd6584398b3ad1f04edf
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sat Jul 11 14:51:59 2020 -0500
+
+    added unit tests for helper functions
+
 commit 56cc3d0efb6f429a16a747982149a774e6e340e6
 Author: Florencia Froebel <florencia.froebel@gmail.com>
 Date:   Sat Jul 11 14:22:29 2020 -0500

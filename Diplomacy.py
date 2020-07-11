@@ -132,11 +132,11 @@ def diplomacy_attacked(attackers, current):
 def diplomacy_eval(supported, supporters, attacked, current):
 
     """
-    returns a list of outcomes
     supported is a dictionary {army : # of support}
     supporters is a dictionary {army : army they support}
-    attacked is a dictionary {army : [list of armies attacking them]} 
-    l is a list
+    attacked is a dictionary {army : [list of armies attacking them]}
+    current is a dictionary {army : current location}
+    returns a dictionary with {army : final location}
     """
     for army in attacked:
         for att_army in attacked.get(army):
@@ -150,7 +150,7 @@ def diplomacy_eval(supported, supporters, attacked, current):
                     supported[supporters.get(army)] -= 1
 
                 elif att_army in supporters:
-                    #supporters.pop(att_army)
+                    supporters.pop(att_army)
                     supported[supporters.get(att_army)] -= 1
 
             elif (army not in supported) and (att_army in supported):
@@ -158,7 +158,7 @@ def diplomacy_eval(supported, supporters, attacked, current):
                 current.update({army : '[dead]'})
 
                 if army in supporters:
-                    #supporters.pop(army)
+                    supporters.pop(army)
                     supported[supporters.get(army)] -= 1
 
             elif (army in supported) and (att_army not in supported):
@@ -166,12 +166,43 @@ def diplomacy_eval(supported, supporters, attacked, current):
                 current.update({att_army : '[dead]'})
 
                 if att_army in supporters:
-                    #supporters.pop(att_army)
+                    supporters.pop(att_army)
                     supported[supporters.get(att_army)] -= 1
 
             else:
-                pass
+                army_supp = supported.get(army)
+                opp_supp = supported.get(att_army)
 
+                if army_supp == opp_supp:
+                    current.update({army : '[dead]'})
+                    current.update({att_army : '[dead]'})
+
+                    if army in supporters:
+                        supporters.pop(army)
+                        supported[supporters.get(army)] -= 1
+
+                    elif att_army in supporters:
+                        supporters.pop(att_army)
+                        supported[supporters.get(att_army)] -= 1
+
+                elif army_supp > opp_supp:
+                    current.update({att_army:'[dead]'})
+
+                    if att_army in supporters:
+                        supporters.pop(att_army)
+                        supported[supporters.get(att_army)] -= 1
+
+                else:
+                    current.update({att_army: current.get(army)})
+                    current.update({army:'[dead]'})
+
+                    if army in supporters:
+                        supporters.pop(army)
+                        supported[supporters.get(army)] -= 1
+
+    return current
+                    
+                
             
 
 # -------------
@@ -206,8 +237,21 @@ def diplomacy_solve(r, w):
 
     attacked = diplomacy_attacked(attackers, current)
 
-
-    
+        
     # finds solution after move    
-    solution = diplomacy_eval(supported, supporters, attacked, current)
+    solutions = diplomacy_eval(supported, supporters, attacked, current)
+
+
+    for solution in solutions:
+        armyName = solution
+        location = solutions.get(solution)
+        diplomacy_print(w, armyName, location)
+
+
+def main():
+    r = StringIO("A Berlin Hold\nB London Move Berlin\nC Austin Move Berlin\nD Barcelona Move Berlin\nE NewYork Support A\n")
+    w = StringIO()
+    diplomacy_solve(r, w)
+    
+        
 
