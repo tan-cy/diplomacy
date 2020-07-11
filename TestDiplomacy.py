@@ -8,7 +8,7 @@ from io import StringIO
 from unittest import main, TestCase
 
 from Diplomacy import diplomacy_read, diplomacy_print, diplomacy_solve, \
-    diplomacy_eval, diplomacy_find_supported, diplomacy_find_supporters
+    diplomacy_eval, diplomacy_find_supported, diplomacy_find_supporters, diplomacy_compare
 
 # --------------
 # TestDiplomacy
@@ -94,7 +94,7 @@ class TestDiplomacy(TestCase):
         self.assertEqual(z, {"B": "D", "A": "C"})
         
     
-    """
+    
     # -----
     # solve
     # -----
@@ -104,30 +104,29 @@ class TestDiplomacy(TestCase):
         w = StringIO()
         diplomacy_solve(r, w)
         self.assertEqual(
-            w.getvalue(), "A Madrid\n B London\n C Berlin\n D Austin\n E [dead]\n")
+            w.getvalue(), "A Madrid\nB London\nC Berlin\nD Austin\nE [dead]\n")
 
     def test_solve_2(self):
         r = StringIO("A Madrid Hold\nB Barcelona Move Madrid\nC London Support A\nD Houston Support B\n")
         w = StringIO()
         diplomacy_solve(r, w)
         self.assertEqual(
-            w.getvalue(), "A [dead]\n B [dead]\n C [dead]\n D [dead]\n")
-
+            w.getvalue(), "A [dead]\nB [dead]\nC London\nD Houston\n")
+    
     def test_solve_3(self):
         r = StringIO("A Berlin Hold\nB London Move Berlin\nC Austin Move Berlin\nD Barcelona Move Berlin\nE NewYork Support A\n")
         w = StringIO()
         diplomacy_solve(r, w)
         self.assertEqual(
-            w.getvalue(), "A Berlin\n B [dead]\n C [dead]\n D [dead]\n E NewYork\n")
-
+            w.getvalue(), "A Berlin\nB [dead]\nC [dead]\nD [dead]\nE NewYork\n")
+   
     def test_solve_4(self):
         r = StringIO("A Madrid Hold\nB London Move Madrid\nC Berlin Support A\nD Austin Move Berlin\n E Houston Support D")
         w = StringIO()
         diplomacy_solve(r, w)
         self.assertEqual(
-            w.getvalue(), "A [dead]\n B [dead]\n C [dead]\n D Berlin\n E Houston")
-
-    """
+            w.getvalue(), "A [dead]\nB [dead]\nC [dead]\nD Berlin\nE Houston\n")
+    
 
 if __name__ == "__main__":
     main()

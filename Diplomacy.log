@@ -1,3 +1,27 @@
+commit 7c750be27b767d085bebfd6584398b3ad1f04edf
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sat Jul 11 14:51:59 2020 -0500
+
+    added unit tests for helper functions
+
+commit 56cc3d0efb6f429a16a747982149a774e6e340e6
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sat Jul 11 14:22:29 2020 -0500
+
+    added simple solution for Diplomacy.py
+
+commit 6de6f391fc779b821105a4443a23cf614a4e19a1
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Thu Jul 9 18:22:16 2020 -0500
+
+    added dictionaries for attackers/supporters, list for all armies
+
+commit e40c238f8b9506668985619ee6c1c2b8d0e57d48
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Wed Jul 8 18:57:26 2020 -0500
+
+    fixed makefile and confirmed success
+
 commit 1d1ee1bc4b6e508c51d938a1b2c9c4aaab89e80d
 Merge: 04f9e80 7ca05c5
 Author: Cindy Tan <ctan@utexas.edu>
