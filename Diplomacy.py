@@ -54,6 +54,7 @@ def diplomacy_find_supported(l, d):
            d.update({l[3]: 1})
     return d
 
+
 # -------------------------
 # diplomacy_find_supporters
 # -------------------------
@@ -71,6 +72,8 @@ def diplomacy_find_supporters(l, d):
         else:
             d.update({l[0]: l[3]})
     return d
+    
+    
 # ----------------------
 # diplomacy_find_start
 # ----------------------
@@ -208,16 +211,3 @@ def diplomacy_solve(r, w):
     # finds solution after move    
     solution = diplomacy_eval(supported, supporters, attacked, current)
 
-def main():
-
-    attackers = {'A':'Madrid', 'C':'Madrid', 'E':'Houston'}
-    current = {'A':'Austin', 'B':'Madrid', 'C':'Houston', 'D':'NewYork', 'E':'Detroit'}
-    answer = diplomacy_attacked(attackers, current)
-
-main()
-        
-    
-
-
-
-    
