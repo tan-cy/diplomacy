@@ -36,25 +36,6 @@ def diplomacy_print(w, i, j):
     w.write(str(i) + " " + str(j) + "\n")
         
 
-# ----------------------
-# diplomacy_find_support
-# ----------------------
-
-
-def diplomacy_find_attacked(l, d, start):
-    """
-    returns a dictionary of army: [list of armies that attacked them]
-    l is a list of strings : ["A", "Barcelona", "Move", "Madrid"]
-    """
-    
-    if l[2] == "Move":
-        army = start.get(l[0])
-        if l[0] in d:
-           d.update({l[3]: d.get(l[3]) + 1})
-        else:
-           d.update({l[3]: 1})
-    return d
-
 # ------------------------
 # diplomacy_find_supported
 # ------------------------
@@ -73,6 +54,7 @@ def diplomacy_find_supported(l, d):
            d.update({l[3]: 1})
     return d
 
+
 # -------------------------
 # diplomacy_find_supporters
 # -------------------------
@@ -90,6 +72,8 @@ def diplomacy_find_supporters(l, d):
         else:
             d.update({l[0]: l[3]})
     return d
+    
+    
 # ----------------------
 # diplomacy_find_start
 # ----------------------
@@ -220,7 +204,7 @@ def diplomacy_solve(r, w):
     solution = diplomacy_eval(supported, supporters, attacked, current)
         
         
-    diplomacy_print(w, i, j)
+    # diplomacy_print(w, i, j)
 
 
 
