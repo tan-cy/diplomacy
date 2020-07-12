@@ -1,3 +1,9 @@
+commit ccdf3abcbb6a385ed6217766659854c42d69a5be
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 14:23:56 2020 -0500
+
+    sorted dictionary to fix pipeline
+
 commit f771be09c7647fc96ffc912e7e20a14dcb56dd7c
 Author: Florencia Froebel <florencia.froebel@gmail.com>
 Date:   Sun Jul 12 14:10:48 2020 -0500
