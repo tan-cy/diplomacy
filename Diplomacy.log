@@ -1,3 +1,16 @@
+commit da8a9c21442e0e539e85fe789d7dced612a772d6
+Merge: 4ff8dc4 6cfbe74
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sat Jul 11 18:20:29 2020 -0500
+
+    fixed corner case, simplified algorithm
+
+commit 6cfbe748faa35172fa34c2258bd77cc68798dc4b
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sat Jul 11 18:06:57 2020 -0500
+
+    fixed corner case, simplified algorithm
+
 commit 4ff8dc40bda28fd26cdd8225b4c52e8a6a7cb8ea
 Author: Florencia Froebel <florencia.froebel@gmail.com>
 Date:   Sat Jul 11 16:04:58 2020 -0500

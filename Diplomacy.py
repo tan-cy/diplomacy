@@ -8,8 +8,8 @@ from io import StringIO
 def diplomacy_read(s):
     """
     reads 3 strings
-    s a string
-    return a list of 3 string, army name, city name, and action 
+    s is a string
+    return a list of 3 strings: army name, city name, and action 
     """
     a = s.split()
     
@@ -29,9 +29,9 @@ def diplomacy_read(s):
 def diplomacy_print(w, i, j):
     """
     print two strings
-    w a writer
-    i is army name
-    j is army's location or [dead]
+    w is a writer
+    i is an army name
+    j is the army's location or [dead]
     """
     w.write(str(i) + " " + str(j) + "\n")
         
@@ -43,7 +43,7 @@ def diplomacy_print(w, i, j):
 
 def diplomacy_find_supported(l, d):
     """
-    returns a dictionary of number of supports for each army 
+    returns a dictionary of the number of supports for each army {army : number of supporters}
     l is a list of strings : ["A", "Barcelona", "Support", C"]
     """
 
@@ -61,7 +61,7 @@ def diplomacy_find_supported(l, d):
 
 def diplomacy_find_supporters(l, d):
     """
-    returns a dictionary of army : army they are supporting 
+    returns a dictionary of all armies and their supporters {army : army they are supporting} 
     l is a list of strings : ["A", "Barcelona", "Support", "B"]
     """
     if d == {}:
@@ -78,7 +78,7 @@ def diplomacy_find_supporters(l, d):
 
 def diplomacy_find_start(l, d):
     """
-    returns a updated dictionary of starting city for an army
+    returns a dictionary of starting city for an army {army:starting city}
     l is a list of strings : ["A", "Barcelona", "Support", "B"]
     """
     if d == {}:
@@ -94,9 +94,9 @@ def diplomacy_find_start(l, d):
 # -------------------
 def diplomacy_attacked(attackers, current):
     """
-    attackers is a dictionary attacking army : city it is attacking
-    current is a dictionary army : current location
-    returns a dictionary army : [list of armies that want to attack it]
+    attackers is a dictionary {attacking army : city it is attacking}
+    current is a dictionary {army : current location}
+    returns a dictionary {army : [list of armies that want to attack it]}
     """
 
     attacked = {}
@@ -130,17 +130,35 @@ def diplomacy_compare(army, opp_army, supported, supporters, current):
     """
     opp_supp = supported.get(opp_army)
     army_supp = supported.get(army)
+    
+    
     if opp_supp > army_supp:
         current.update({opp_army: current.get(army)})
         current.update({army: '[dead]'})
+        
         if army in supporters:
             supported[supporters.get(army)] -= 1
             supporters.pop(army)
+            
     elif army_supp > opp_supp:
         current.update({opp_army: '[dead]'})
+        
+        if opp_army in supporters:
+            supported[supporters.get(opp_army)] -= 1
+            supporters.pop(opp_army)
+            
     else:
         current.update({opp_army: '[dead]'})
         current.update({army: '[dead]'})
+
+        if army in supporters:
+            supported[supporters.get(army)] -= 1
+            supporters.pop(army)
+
+        elif opp_army in supporters:
+            supported[supporters.get(opp_army)] -= 1
+            supporters.pop(opp_army)
+            
     return supported, supporters, current
 
 
@@ -149,25 +167,37 @@ def diplomacy_compare(army, opp_army, supported, supporters, current):
 # -------------
 
 
-def diplomacy_eval(supported, supporters, attacked, current):
+def diplomacy_eval(supported, supporters, attacked, attackers, current):
 
     """
     supported is a dictionary {army : # of support}
     supporters is a dictionary {army : army they support}
     attacked is a dictionary {army : [list of armies attacking them]}
+    attackers is a dictionary {army : city it is attacking}
     current is a dictionary {army : current location}
     returns a dictionary with {army : final location}
     """
     for army in attacked:
+             
         if army in supporters:
+            
             for opp_army in attacked.get(army):
-                supported, supporters, current = diplomacy_compare(army, opp_army, supported, supporters, current) 
+                
+                supported, supporters, current = diplomacy_compare(army, opp_army, supported, supporters, current)
+                
     for army in attacked:
+        
         if current.get(army) == '[dead]':
-            pass
-        else:
+            
             for opp_army in attacked.get(army):
+                if current.get(opp_army) != '[dead]':
+                    current.update({opp_army:attackers.get(opp_army)})
+                else:
+                    pass
+        else:
+            for opp_army in attacked.get(army):                    
                 supported, supporters, current = diplomacy_compare(army, opp_army, supported, supporters, current)               
+    
     return current
 
 
@@ -194,16 +224,20 @@ def diplomacy_solve(r, w):
         elif (len(l) > 3) and (l[2] == "Support"):
             supported = diplomacy_find_supported(l, supported)
             supporters = diplomacy_find_supporters(l, supporters)
+
         
     # updates supported for armies with 0 supporters     
     for army in current:
         if army not in supported:
+        
             supported.update({army:0})
+
             
     attacked = diplomacy_attacked(attackers, current)
 
+
     # finds solution after move    
-    solutions = diplomacy_eval(supported, supporters, attacked, current)
+    solutions = diplomacy_eval(supported, supporters, attacked, attackers, current)
 
     for solution in solutions:
         armyName = solution
@@ -211,10 +245,5 @@ def diplomacy_solve(r, w):
         diplomacy_print(w, armyName, location)
 
 
-def main():
-    r = StringIO("A Berlin Hold\nB London Move Berlin\nC Austin Move Berlin\nD Barcelona Move Berlin\nE NewYork Support A\n")
-    w = StringIO()
-    diplomacy_solve(r, w)
-    
         
 
