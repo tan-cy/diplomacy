@@ -1,3 +1,9 @@
+commit 7c058d909e43d729eff144ef2d36b54fce590e84
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 10:34:26 2020 -0500
+
+    implementing the simplest solution for Diplomacy.py and adding unit tests
+
 commit da8a9c21442e0e539e85fe789d7dced612a772d6
 Merge: 4ff8dc4 6cfbe74
 Author: Cindy Tan <ctan@utexas.edu>

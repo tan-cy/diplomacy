@@ -13,13 +13,11 @@ def diplomacy_read(s):
     """
     a = s.split()
     
-    try:
-        b = [a[0], a[1], a[2]]
-        if len(a) == 4:
-            b.append(a[3])
-        return b
-    except:
-        sys.exit()
+    b = [a[0], a[1], a[2]]
+    if len(a) == 4:
+        b.append(a[3])
+    return b
+
         
 # -------------
 # diplomacy_print
@@ -128,6 +126,11 @@ def diplomacy_compare(army, opp_army, supported, supporters, current):
     """
     returns supported, supporters, current after comparing supporting armies
     """
+    
+    if army in supporters:
+        supported[supporters.get(army)] -= 1
+        supporters.pop(army)
+
     opp_supp = supported.get(opp_army)
     army_supp = supported.get(army)
     
@@ -135,29 +138,18 @@ def diplomacy_compare(army, opp_army, supported, supporters, current):
     if opp_supp > army_supp:
         current.update({opp_army: current.get(army)})
         current.update({army: '[dead]'})
-        
-        if army in supporters:
-            supported[supporters.get(army)] -= 1
-            supporters.pop(army)
+
             
     elif army_supp > opp_supp:
-        current.update({opp_army: '[dead]'})
         
-        if opp_army in supporters:
-            supported[supporters.get(opp_army)] -= 1
-            supporters.pop(opp_army)
+        current.update({army: current.get(army)})
+        current.update({opp_army: '[dead]'})
+
             
     else:
+        
         current.update({opp_army: '[dead]'})
         current.update({army: '[dead]'})
-
-        if army in supporters:
-            supported[supporters.get(army)] -= 1
-            supporters.pop(army)
-
-        elif opp_army in supporters:
-            supported[supporters.get(opp_army)] -= 1
-            supporters.pop(opp_army)
             
     return supported, supporters, current
 
@@ -178,24 +170,21 @@ def diplomacy_eval(supported, supporters, attacked, attackers, current):
     returns a dictionary with {army : final location}
     """
     for army in attacked:
-             
+        
         if army in supporters:
             
             for opp_army in attacked.get(army):
-                
                 supported, supporters, current = diplomacy_compare(army, opp_army, supported, supporters, current)
                 
     for army in attacked:
         
         if current.get(army) == '[dead]':
-            
             for opp_army in attacked.get(army):
                 if current.get(opp_army) != '[dead]':
                     current.update({opp_army:attackers.get(opp_army)})
-                else:
-                    pass
+                
         else:
-            for opp_army in attacked.get(army):                    
+            for opp_army in attacked.get(army):
                 supported, supporters, current = diplomacy_compare(army, opp_army, supported, supporters, current)               
     
     return current
@@ -234,7 +223,6 @@ def diplomacy_solve(r, w):
 
             
     attacked = diplomacy_attacked(attackers, current)
-
 
     # finds solution after move    
     solutions = diplomacy_eval(supported, supporters, attacked, attackers, current)

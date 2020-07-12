@@ -56,38 +56,6 @@ class TestDiplomacy(TestCase):
         diplomacy_print(w, "Z", "NewYork")
         self.assertEqual(w.getvalue(), "Z NewYork\n")
 
-    # --------------------
-    # diplomacy_find_start
-    # --------------------
-
-    def test_find_start1(self):
-        l = ["A", "Austin" ,"Support", "B"]
-        d = {}
-        answer = diplomacy_find_start(l, d)
-        self.assertEqual(answer, {'A':'Austin'})
-
-    # ------------------
-    # diplomacy_attacked
-    # ------------------
-
-    def test_attacked1(self):
-        attackers = {'A':'Madrid', 'C':'Madrid', 'E':'Houston'}
-        current = {'A':'Austin', 'B':'Madrid', 'C':'Houston', 'D':'NewYork', 'E':'Detroit'}
-        answer = diplomacy_attacked(attackers, current)
-        self.assertEqual(answer, {'B':['A','C'], 'C':['E']})
-
-    def test_attacked2(self):
-        attackers = {'A': 'Madrid', 'C':'Madrid', 'D':'Madrid', 'E':'Houston', 'G':'Houston', 'H':'NewYork'}
-        current = {'A':'Austin', 'B':'Madrid', 'C':'Cairo', 'D':'Houston', 'E':'Tomball', 'F':'NewYork','G':'LaPaz','H':'Tarija'}
-        answer = diplomacy_attacked(attackers, current)
-        self.assertEqual(answer, {'B':['A','C','D'], 'D':['E','G'], 'F':['H']})
-
-    def test_attacked3(self):
-        attackers = {}
-        current = {'A':'Austin','B':'Madrid', 'C':'Cairo'}
-        answer = diplomacy_attacked(attackers, current)
-        self.assertEqual(answer, {})
-    
     # ------------------------
     # diplomacy_find_supported
     # ------------------------
@@ -126,8 +94,69 @@ class TestDiplomacy(TestCase):
         d = {"B": "D"}
         z = diplomacy_find_supporters(l,d)
         self.assertEqual(z, {"B": "D", "A": "C"})
-        
+
+    # --------------------
+    # diplomacy_find_start
+    # --------------------
+
+    def test_find_start1(self):
+        l = ["A", "Austin" ,"Support", "B"]
+        d = {}
+        answer = diplomacy_find_start(l, d)
+        self.assertEqual(answer, {'A':'Austin'})
+
+    # ------------------
+    # diplomacy_attacked
+    # ------------------
+
+    def test_attacked1(self):
+        attackers = {'A':'Madrid', 'C':'Madrid', 'E':'Houston'}
+        current = {'A':'Austin', 'B':'Madrid', 'C':'Houston', 'D':'NewYork', 'E':'Detroit'}
+        answer = diplomacy_attacked(attackers, current)
+        self.assertEqual(answer, {'B':['A','C'], 'C':['E']})
+
+    def test_attacked2(self):
+        attackers = {'A': 'Madrid', 'C':'Madrid', 'D':'Madrid', 'E':'Houston', 'G':'Houston', 'H':'NewYork'}
+        current = {'A':'Austin', 'B':'Madrid', 'C':'Cairo', 'D':'Houston', 'E':'Tomball', 'F':'NewYork','G':'LaPaz','H':'Tarija'}
+        answer = diplomacy_attacked(attackers, current)
+        self.assertEqual(answer, {'B':['A','C','D'], 'D':['E','G'], 'F':['H']})
+
+    def test_attacked3(self):
+        attackers = {}
+        current = {'A':'Austin','B':'Madrid', 'C':'Cairo'}
+        answer = diplomacy_attacked(attackers, current)
+        self.assertEqual(answer, {})
     
+    
+    # ----------------
+    # dipomacy_compare
+    # ----------------
+    def test_compare_1(self):
+        army = 'A'
+        opp_army = 'B'
+        supported = {'A':0, 'B':0}
+        supporters = {}
+        current = {'A':'Austin', 'B':'Berlin'}
+        answer = diplomacy_compare(army, opp_army, supported, supporters, current)
+        self.assertEqual(answer, ({'A':0, 'B':0}, {}, {'A':'[dead]', 'B':'[dead]'}))
+
+    def test_compare_2(self):
+        army = 'A'
+        opp_army = 'B'
+        supported = {'A':2, 'B':1}
+        supporters = {'C':'A', 'D':'A', 'E':'B'}
+        current = {'A':'Austin', 'B':'Berlin', 'C':'Cairo', 'D':'Detroit', 'E':'NewYork'}
+        answer = diplomacy_compare(army, opp_army, supported, supporters, current)
+        self.assertEqual(answer, ({'A':2, 'B':1}, {'C':'A', 'D':'A', 'E':'B'}, {'A':'Austin', 'B':'[dead]', 'C':'Cairo', 'D':'Detroit', 'E':'NewYork'}))
+
+    def test_compare_3(self):
+        army = 'A'
+        opp_army = 'D'
+        supported = {'A':0, 'D':1}
+        supporters = {'A':'D'}
+        current = {'A':'Austin', 'B':'Berlin', 'C':'Cairo', 'D':'Detroit'}
+        answer = diplomacy_compare(army, opp_army, supported, supporters, current)
+        self.assertEqual(answer, ({'A':0, 'D':0}, {}, {'A':'[dead]', 'B':'Berlin', 'C':'Cairo', 'D':'[dead]'}))
     
     # -----
     # solve
@@ -168,6 +197,81 @@ class TestDiplomacy(TestCase):
         w = StringIO()
         diplomacy_solve(r,w)
         self.assertEqual(w.getvalue(), "A Madrid\nB [dead]\nC Berlin\nD London\n")
+
+    def test_solve_7(self):
+        r = StringIO("A Madrid Move London\nB London Support Madrid\n")
+        w = StringIO()
+        diplomacy_solve(r,w)
+        self.assertEqual(w.getvalue(), "A [dead]\nB [dead]\n")
+
+    def test_solve_8(self):
+        r = StringIO("A Madrid Hold\n")
+        w = StringIO()
+        diplomacy_solve(r,w)
+        self.assertEqual(w.getvalue(), "A Madrid\n")
+
+    def test_solve_9(self):
+        r = StringIO("A Madrid Hold\nB Barcelona Move Madrid\nC London Support B\n")
+        w = StringIO()
+        diplomacy_solve(r,w)
+        self.assertEqual(w.getvalue(), "A [dead]\nB Madrid\nC London\n")
+
+    def test_solve_10(self):
+        r = StringIO("A Madrid Hold\nB Barcelona Move Madrid\n")
+        w = StringIO()
+        diplomacy_solve(r,w)
+        self.assertEqual(w.getvalue(), "A [dead]\nB [dead]\n")
+
+    def test_solve_11(self):
+        r = StringIO("A Madrid Hold\nB Barcelona Move Madrid\nC London Support B\nD Austin Move London\n")
+        w = StringIO()
+        diplomacy_solve(r,w)
+        self.assertEqual(w.getvalue(), "A [dead]\nB [dead]\nC [dead]\nD [dead]\n")
+
+    def test_solve_12(self):
+        r = StringIO("A Madrid Hold\nB Barcelona Move Madrid\nC London Move Madrid\n")
+        w = StringIO()
+        diplomacy_solve(r,w)
+        self.assertEqual(w.getvalue(), "A [dead]\nB [dead]\nC [dead]\n")
+
+    def test_solve_13(self):
+        r = StringIO("A Madrid Hold\nB Barcelona Move Madrid\nC London Move Madrid\nD Paris Support B\n")
+        w = StringIO()
+        diplomacy_solve(r,w)
+        self.assertEqual(w.getvalue(), "A [dead]\nB Madrid\nC [dead]\nD Paris\n")
+
+    def test_solve_14(self):
+        r = StringIO("A Madrid Hold\nB Barcelona Move Madrid\nC London Move Madrid\nD Paris Support B\nE Austin Support A\n")
+        w = StringIO()
+        diplomacy_solve(r,w)
+        self.assertEqual(w.getvalue(), "A [dead]\nB [dead]\nC [dead]\nD Paris\nE Austin\n")
+
+    def test_solve_15(self):
+        r = StringIO("A Austin Support D\nB Berlin Hold\nC Cairo Hold\nD Detroit Move Austin\n")
+        w = StringIO()
+        diplomacy_solve(r,w)
+        self.assertEqual(w.getvalue(), "A [dead]\nB Berlin\nC Cairo\nD [dead]\n")
+
+    def test_solve_16(self):
+        r = StringIO("A Madrid Hold\nB Paris Hold\nC Moscow Move Madrid\nD Kiev Support C\nE Berlin Move Paris\nF Austin Support E\nG Houston Support F\nH Dallas Support F\nI Copenhagen Move Austin\n")
+        w = StringIO()
+        diplomacy_solve(r,w)
+        self.assertEqual(w.getvalue(), "A [dead]\nB [dead]\nC Madrid\nD Kiev\nE [dead]\nF Austin\nG Houston\nH Dallas\nI [dead]\n")
+
+    def test_solve_17(self):
+        r = StringIO("A Madrid Hold\nB Barcelona Move Madrid\nC London Move Barcelona\n")
+        w = StringIO()
+        diplomacy_solve(r,w)
+        self.assertEqual(w.getvalue(), "A [dead]\nB [dead]\nC Barcelona\n")
+
+    def test_solve_18(self):
+        r = StringIO("A Madrid Hold\nB Berlin Support A\nC Cairo Support B\nD Detroit Support C\nE NewYork Move Detroit\nF Austin Move Cairo\nG Georgetown Move Madrid\n")
+        w = StringIO()
+        diplomacy_solve(r,w)
+        self.assertEqual(w.getvalue(), "A Madrid\nB Berlin\nC [dead]\nD [dead]\nE [dead]\nF [dead]\nG [dead]\n")
+
+        
+        
     
-if __name__ == "__main__":
+if __name__ == "__main__": #pragma: no cover
     main()
