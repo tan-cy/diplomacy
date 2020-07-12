@@ -226,10 +226,11 @@ def diplomacy_solve(r, w):
 
     # finds solution after move    
     solutions = diplomacy_eval(supported, supporters, attacked, attackers, current)
-
-    for solution in solutions:
-        armyName = solution
-        location = solutions.get(solution)
+    sorted_solutions = sorted(solutions.items())
+    
+    for solution in sorted_solutions:
+        armyName = solution[0]
+        location = solution[1]
         diplomacy_print(w, armyName, location)
 
 

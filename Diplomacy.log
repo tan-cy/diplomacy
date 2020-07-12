@@ -1,3 +1,21 @@
+commit f771be09c7647fc96ffc912e7e20a14dcb56dd7c
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 14:10:48 2020 -0500
+
+    Fixing gitlab ci file
+
+commit 989f9954ad37309bcfac62fc37282919f03623d3
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 14:07:32 2020 -0500
+
+    Updating TestDiplomacy.out
+
+commit 643f5a6a4d86aab6b4cf7f8cfafa901ea3b5dc79
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 14:06:14 2020 -0500
+
+    Debugging Diplomacy.py and adding more unit tests
+
 commit 7c058d909e43d729eff144ef2d36b54fce590e84
 Author: Florencia Froebel <florencia.froebel@gmail.com>
 Date:   Sun Jul 12 10:34:26 2020 -0500
