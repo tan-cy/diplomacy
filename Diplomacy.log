@@ -17,6 +17,36 @@ Date:   Sun Jul 12 19:54:18 2020 -0500
 
     debugging pipeline
 
+commit 36b7d5798e5da6a5dbed87d5edc42e765de06f73
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Mon Jul 13 15:27:51 2020 -0500
+
+    Fixed bug in Diplomacy.py which should fix the pipeline
+
+commit 71751d9467d61596e8ead00dd02354f970cf0859
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 21:53:26 2020 -0500
+
+    fixed unit test to test non sorted dictionary
+
+commit 5460e618b9696acbcf16e897a82edd03a264977c
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 20:58:44 2020 -0500
+
+    debugging attack method
+
+commit c72bbd20e6190f6217a05234c5b6691822c5bea1
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 20:30:35 2020 -0500
+
+    fixed corner case
+
+commit 5292bd1e45ee024f2a47ae517a703d13f97a4f00
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 20:17:04 2020 -0500
+
+    Changing the makefile to see if pipeline will fail on dev branch
+
 commit 2255fcb290cf0a533f9901e2adf84ccdc64ae134
 Author: Cindy Tan <ctan@utexas.edu>
 Date:   Sun Jul 12 19:45:43 2020 -0500
