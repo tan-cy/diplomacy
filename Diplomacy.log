@@ -1,3 +1,9 @@
+commit 9baf9e81b10579649ae1e590ea5027cbc42fb22c
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 18:56:05 2020 -0500
+
+    changed makefile to debug
+
 commit ccdf3abcbb6a385ed6217766659854c42d69a5be
 Author: Cindy Tan <ctan@utexas.edu>
 Date:   Sun Jul 12 14:23:56 2020 -0500
