@@ -1,3 +1,9 @@
+commit 060ec2411fc511a77e273d333affd8b2ba296fea
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 19:28:24 2020 -0500
+
+    debugged diplomacy_attack method
+
 commit 9baf9e81b10579649ae1e590ea5027cbc42fb22c
 Author: Cindy Tan <ctan@utexas.edu>
 Date:   Sun Jul 12 18:56:05 2020 -0500

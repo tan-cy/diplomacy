@@ -114,8 +114,8 @@ def diplomacy_attacked(attackers, current):
                     else:
                         a = attacked.get(city)
                         att = a + [attacker]
-                    attacked.update({city: att})
-                
+                    attacked.update({city: sorted(att)})
+
 
     return attacked
 
