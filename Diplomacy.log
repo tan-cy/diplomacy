@@ -1,3 +1,9 @@
+commit 2d56cf9b27b533bc69c92bb85f8a2e5a8aa8f26c
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 19:41:43 2020 -0500
+
+    sorted dictionary in attack method
+
 commit 060ec2411fc511a77e273d333affd8b2ba296fea
 Author: Cindy Tan <ctan@utexas.edu>
 Date:   Sun Jul 12 19:28:24 2020 -0500
