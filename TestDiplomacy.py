@@ -199,7 +199,7 @@ class TestDiplomacy(TestCase):
         self.assertEqual(w.getvalue(), "A [dead]\nB [dead]\nC [dead]\nD [dead]\n")
     
     def test_solve_6(self):
-        r = StringIO("A Madrid Hold\nB London Move Madrid\nC Berlin Support A\nD Detroit Move London\n")
+        r = StringIO("A Madrid Hold\nB Detroit Move London\nC Berlin Support A\nD London Move Madrid\n")
         w = StringIO()
         diplomacy_solve(r,w)
         self.assertEqual(w.getvalue(), "A Madrid\nB [dead]\nC Berlin\nD London\n")
