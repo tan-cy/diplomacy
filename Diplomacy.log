@@ -1,3 +1,113 @@
+commit 2255fcb290cf0a533f9901e2adf84ccdc64ae134
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 19:45:43 2020 -0500
+
+    fixed makefile
+
+commit 2d56cf9b27b533bc69c92bb85f8a2e5a8aa8f26c
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 19:41:43 2020 -0500
+
+    sorted dictionary in attack method
+
+commit 060ec2411fc511a77e273d333affd8b2ba296fea
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 19:28:24 2020 -0500
+
+    debugged diplomacy_attack method
+
+commit 9baf9e81b10579649ae1e590ea5027cbc42fb22c
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 18:56:05 2020 -0500
+
+    changed makefile to debug
+
+commit ccdf3abcbb6a385ed6217766659854c42d69a5be
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 14:23:56 2020 -0500
+
+    sorted dictionary to fix pipeline
+
+commit f771be09c7647fc96ffc912e7e20a14dcb56dd7c
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 14:10:48 2020 -0500
+
+    Fixing gitlab ci file
+
+commit 989f9954ad37309bcfac62fc37282919f03623d3
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 14:07:32 2020 -0500
+
+    Updating TestDiplomacy.out
+
+commit 643f5a6a4d86aab6b4cf7f8cfafa901ea3b5dc79
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 14:06:14 2020 -0500
+
+    Debugging Diplomacy.py and adding more unit tests
+
+commit 7c058d909e43d729eff144ef2d36b54fce590e84
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 10:34:26 2020 -0500
+
+    implementing the simplest solution for Diplomacy.py and adding unit tests
+
+commit da8a9c21442e0e539e85fe789d7dced612a772d6
+Merge: 4ff8dc4 6cfbe74
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sat Jul 11 18:20:29 2020 -0500
+
+    fixed corner case, simplified algorithm
+
+commit 6cfbe748faa35172fa34c2258bd77cc68798dc4b
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sat Jul 11 18:06:57 2020 -0500
+
+    fixed corner case, simplified algorithm
+
+commit 4ff8dc40bda28fd26cdd8225b4c52e8a6a7cb8ea
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sat Jul 11 16:04:58 2020 -0500
+
+    implementing the simple solution for Diplomacy.py
+
+commit 707e81b46e5ff2071f5e88540c828971ff092442
+Merge: 34a8989 7c750be
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sat Jul 11 15:38:17 2020 -0500
+
+    Merge branch 'dev' of https://gitlab.com/tancy/diplomacy into dev
+
+commit 34a8989e90dd4a9ee5350df01f53c6601d1bd36d
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sat Jul 11 15:33:04 2020 -0500
+
+    added new function to Diplomacy.py and more tests
+
+commit 7c750be27b767d085bebfd6584398b3ad1f04edf
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sat Jul 11 14:51:59 2020 -0500
+
+    added unit tests for helper functions
+
+commit 56cc3d0efb6f429a16a747982149a774e6e340e6
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sat Jul 11 14:22:29 2020 -0500
+
+    added simple solution for Diplomacy.py
+
+commit 6de6f391fc779b821105a4443a23cf614a4e19a1
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Thu Jul 9 18:22:16 2020 -0500
+
+    added dictionaries for attackers/supporters, list for all armies
+
+commit e40c238f8b9506668985619ee6c1c2b8d0e57d48
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Wed Jul 8 18:57:26 2020 -0500
+
+    fixed makefile and confirmed success
+
 commit 1d1ee1bc4b6e508c51d938a1b2c9c4aaab89e80d
 Merge: 04f9e80 7ca05c5
 Author: Cindy Tan <ctan@utexas.edu>

@@ -9,9 +9,7 @@
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>Diplomacy</strong></big></big></font></td
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Ccs330e%5Cdiplomacy%5Cdiplomacy.py">c:\cs330e\diplomacy\diplomacy.py</a></font></td></tr></table>
-    <p><tt>#&nbsp;-------------<br>
-#&nbsp;diplomacy_read<br>
-#&nbsp;-------------</tt></p>
+    <p></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#eeaa77">
@@ -19,18 +17,29 @@
 <font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-diplomacy_eval"><strong>diplomacy_eval</strong></a>()</dt><dd><tt>#&nbsp;-------------<br>
-#&nbsp;diplomacy_eval<br>
-#&nbsp;-------------</tt></dd></dl>
- <dl><dt><a name="-diplomacy_find_support"><strong>diplomacy_find_support</strong></a>(l, d)</dt><dd><tt>returns&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;number&nbsp;of&nbsp;supports&nbsp;for&nbsp;each&nbsp;city&nbsp;<br>
-l&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;strings&nbsp;:&nbsp;["A",&nbsp;"Barcelona",&nbsp;"Move",&nbsp;"Madrid"]</tt></dd></dl>
+<td width="100%"><dl><dt><a name="-diplomacy_attacked"><strong>diplomacy_attacked</strong></a>(attackers, current)</dt><dd><tt>attackers&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;{attacking&nbsp;army&nbsp;:&nbsp;city&nbsp;it&nbsp;is&nbsp;attacking}<br>
+current&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;{army&nbsp;:&nbsp;current&nbsp;location}<br>
+returns&nbsp;a&nbsp;dictionary&nbsp;{army&nbsp;:&nbsp;[list&nbsp;of&nbsp;armies&nbsp;that&nbsp;want&nbsp;to&nbsp;attack&nbsp;it]}</tt></dd></dl>
+ <dl><dt><a name="-diplomacy_compare"><strong>diplomacy_compare</strong></a>(army, opp_army, supported, supporters, current)</dt><dd><tt>returns&nbsp;supported,&nbsp;supporters,&nbsp;current&nbsp;after&nbsp;comparing&nbsp;supporting&nbsp;armies</tt></dd></dl>
+ <dl><dt><a name="-diplomacy_eval"><strong>diplomacy_eval</strong></a>(supported, supporters, attacked, attackers, current)</dt><dd><tt>supported&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;{army&nbsp;:&nbsp;#&nbsp;of&nbsp;support}<br>
+supporters&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;{army&nbsp;:&nbsp;army&nbsp;they&nbsp;support}<br>
+attacked&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;{army&nbsp;:&nbsp;[list&nbsp;of&nbsp;armies&nbsp;attacking&nbsp;them]}<br>
+attackers&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;{army&nbsp;:&nbsp;city&nbsp;it&nbsp;is&nbsp;attacking}<br>
+current&nbsp;is&nbsp;a&nbsp;dictionary&nbsp;{army&nbsp;:&nbsp;current&nbsp;location}<br>
+returns&nbsp;a&nbsp;dictionary&nbsp;with&nbsp;{army&nbsp;:&nbsp;final&nbsp;location}</tt></dd></dl>
+ <dl><dt><a name="-diplomacy_find_start"><strong>diplomacy_find_start</strong></a>(l, d)</dt><dd><tt>returns&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;starting&nbsp;city&nbsp;for&nbsp;an&nbsp;army&nbsp;{army:starting&nbsp;city}<br>
+l&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;strings&nbsp;:&nbsp;["A",&nbsp;"Barcelona",&nbsp;"Support",&nbsp;"B"]</tt></dd></dl>
+ <dl><dt><a name="-diplomacy_find_supported"><strong>diplomacy_find_supported</strong></a>(l, d)</dt><dd><tt>returns&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;the&nbsp;number&nbsp;of&nbsp;supports&nbsp;for&nbsp;each&nbsp;army&nbsp;{army&nbsp;:&nbsp;number&nbsp;of&nbsp;supporters}<br>
+l&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;strings&nbsp;:&nbsp;["A",&nbsp;"Barcelona",&nbsp;"Support",&nbsp;C"]</tt></dd></dl>
+ <dl><dt><a name="-diplomacy_find_supporters"><strong>diplomacy_find_supporters</strong></a>(l, d)</dt><dd><tt>returns&nbsp;a&nbsp;dictionary&nbsp;of&nbsp;all&nbsp;armies&nbsp;and&nbsp;their&nbsp;supporters&nbsp;{army&nbsp;:&nbsp;army&nbsp;they&nbsp;are&nbsp;supporting}&nbsp;<br>
+l&nbsp;is&nbsp;a&nbsp;list&nbsp;of&nbsp;strings&nbsp;:&nbsp;["A",&nbsp;"Barcelona",&nbsp;"Support",&nbsp;"B"]</tt></dd></dl>
  <dl><dt><a name="-diplomacy_print"><strong>diplomacy_print</strong></a>(w, i, j)</dt><dd><tt>print&nbsp;two&nbsp;strings<br>
-w&nbsp;a&nbsp;writer<br>
-i&nbsp;is&nbsp;army&nbsp;name<br>
-j&nbsp;is&nbsp;army's&nbsp;location&nbsp;or&nbsp;[dead]</tt></dd></dl>
+w&nbsp;is&nbsp;a&nbsp;writer<br>
+i&nbsp;is&nbsp;an&nbsp;army&nbsp;name<br>
+j&nbsp;is&nbsp;the&nbsp;army's&nbsp;location&nbsp;or&nbsp;[dead]</tt></dd></dl>
  <dl><dt><a name="-diplomacy_read"><strong>diplomacy_read</strong></a>(s)</dt><dd><tt>reads&nbsp;3&nbsp;strings<br>
-s&nbsp;a&nbsp;string<br>
-return&nbsp;a&nbsp;list&nbsp;of&nbsp;3&nbsp;string,&nbsp;army&nbsp;name,&nbsp;city&nbsp;name,&nbsp;and&nbsp;action</tt></dd></dl>
+s&nbsp;is&nbsp;a&nbsp;string<br>
+return&nbsp;a&nbsp;list&nbsp;of&nbsp;3&nbsp;strings:&nbsp;army&nbsp;name,&nbsp;city&nbsp;name,&nbsp;and&nbsp;action</tt></dd></dl>
  <dl><dt><a name="-diplomacy_solve"><strong>diplomacy_solve</strong></a>(r, w)</dt><dd><tt>r&nbsp;a&nbsp;reader<br>
 w&nbsp;a&nbsp;writer</tt></dd></dl>
 </td></tr></table>
