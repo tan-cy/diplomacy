@@ -102,7 +102,9 @@ def diplomacy_attacked(attackers, current):
     for attacker in attackers:
         for city in current:   
             if attackers.get(attacker) == current.get(city):
-                if attacked == {}:
+                if city in attacker: 
+                    pass
+                elif attacked == {}:
                     att = [attacker]
                     attacked = {city: att}
                 else:
