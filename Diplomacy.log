@@ -1,3 +1,22 @@
+commit ba8a36c2029655ac21b948eef2b4513f223297d1
+Merge: 5ebe5d2 8f7794e
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 20:00:25 2020 -0500
+
+    Merge branch 'master' of https://gitlab.com/tancy/diplomacy
+
+commit 5ebe5d27b006ffd3528323baa922f511e82b0dba
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 19:59:04 2020 -0500
+
+    Modified makefile to fix pipeling on master branch
+
+commit 8f7794efe891d377d80fa8d5196d31c596c16ca3
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 19:54:18 2020 -0500
+
+    debugging pipeline
+
 commit 2255fcb290cf0a533f9901e2adf84ccdc64ae134
 Author: Cindy Tan <ctan@utexas.edu>
 Date:   Sun Jul 12 19:45:43 2020 -0500
