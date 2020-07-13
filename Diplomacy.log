@@ -1,3 +1,21 @@
+commit c72bbd20e6190f6217a05234c5b6691822c5bea1
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 20:30:35 2020 -0500
+
+    fixed corner case
+
+commit 5292bd1e45ee024f2a47ae517a703d13f97a4f00
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 20:17:04 2020 -0500
+
+    Changing the makefile to see if pipeline will fail on dev branch
+
+commit 2255fcb290cf0a533f9901e2adf84ccdc64ae134
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 19:45:43 2020 -0500
+
+    fixed makefile
+
 commit 2d56cf9b27b533bc69c92bb85f8a2e5a8aa8f26c
 Author: Cindy Tan <ctan@utexas.edu>
 Date:   Sun Jul 12 19:41:43 2020 -0500

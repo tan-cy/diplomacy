@@ -127,6 +127,12 @@ class TestDiplomacy(TestCase):
         answer = diplomacy_attacked(attackers, current)
         self.assertEqual(answer, {})
     
+    def test_attacked4(self):
+        attackers = {'B':'Madrid', 'D':'London'}
+        current = {'A':'Madrid','B':'London', 'C':'Berlin', 'D':'Detroid'}
+        answer = diplomacy_attacked(attackers, current)
+        self.assertEqual(answer, {'A':['B'], 'B':['D']})
+    
     
     # ----------------
     # dipomacy_compare

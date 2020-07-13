@@ -100,20 +100,20 @@ def diplomacy_attacked(attackers, current):
     attacked = {}
 
     for attacker in attackers:
-        for city in current:   
-            if attackers.get(attacker) == current.get(city):
-                if city in attacker: 
+        for army in current:   
+            if attackers.get(attacker) == current.get(army): 
+                if current.get(attacker) == attackers.get(army):
                     pass
                 elif attacked == {}:
                     att = [attacker]
-                    attacked = {city: att}
+                    attacked = {army: att}
                 else:
-                    if attacked.get(city) == None:
+                    if attacked.get(army) == None:
                         att = [attacker]
                     else:
-                        a = attacked.get(city)
+                        a = attacked.get(army)
                         att = a + [attacker]
-                    attacked.update({city: sorted(att)})
+                    attacked.update({army: sorted(att)})
 
     return attacked
 
