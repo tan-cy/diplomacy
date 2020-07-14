@@ -230,11 +230,9 @@ def diplomacy_eval(moved, supported, supporters, attacked, attackers, current):
     returns an updated version of current
     """
     d = {}
-
-    for army in attacked:
         
+    for army in attacked:
         if army in supporters:
-
             for opp_army in attacked.get(army):
                 supported, supporters, current = diplomacy_compare(attacked, attackers, army, opp_army, supported, supporters, current)
                 
@@ -243,7 +241,6 @@ def diplomacy_eval(moved, supported, supporters, attacked, attackers, current):
         lst_armies = moved.get(city)  
         current = find_winner(lst_armies, current, attackers, supporters, supported)
 
-    
     return current
 
     
@@ -327,9 +324,8 @@ def diplomacy_solve(r, w):
     for army in current:
         if army not in supported:
             supported.update({army:0})
-            
+
     attacked = diplomacy_attacked(attackers, current) # dict {army : [list of attackers]}
-    
     
     
     # finds solution after move    
