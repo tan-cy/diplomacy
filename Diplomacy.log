@@ -1,3 +1,16 @@
+commit cf2931b528a8aef103b754f5865013c4f5fa4584
+Merge: 8f8b7ab f850ebc
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Tue Jul 14 01:12:55 2020 -0500
+
+    Merge branch 'dev' of https://gitlab.com/tancy/diplomacy into dev
+
+commit 8f8b7ab2154edcbb07ed8eade5dafb084f1f7f91
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Tue Jul 14 01:06:31 2020 -0500
+
+    Updating Diplomacy.log
+
 commit 920013687fca68bea01e3c2f7f96ee1ccc55cc0a
 Merge: 3fabef2 e8fd0d4
 Author: Florencia Froebel <florencia.froebel@gmail.com>
@@ -16,6 +29,12 @@ Author: Florencia Froebel <florencia.froebel@gmail.com>
 Date:   Mon Jul 13 23:46:22 2020 -0500
 
     implemented a different solution for diplomacy.py
+
+commit f850ebc55c691deecb854ad5109a83e2888ea407
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Mon Jul 13 20:05:07 2020 -0500
+
+    fixed corner cases, added 2 acceptance tests
 
 commit 3fabef24d5cb44593efa7cf886b9866265c03b28
 Author: Florencia Froebel <florencia.froebel@gmail.com>
