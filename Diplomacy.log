@@ -1,3 +1,9 @@
+commit f7f912c65bb272a1436ad9ba3c855a40f0fb5a9b
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Tue Jul 14 09:00:38 2020 -0500
+
+    Added two more unit tests
+
 commit 184fcdb3ee65589875b64f47ed826bbf8ef0e438
 Merge: ba180b3 96afb89
 Author: Florencia Froebel <florencia.froebel@gmail.com>
