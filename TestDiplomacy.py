@@ -307,7 +307,18 @@ class TestDiplomacy(TestCase):
         diplomacy_solve(r,w)
         self.assertEqual(w.getvalue(), "A Madrid\nB Berlin\nC [dead]\nD [dead]\nE [dead]\nF [dead]\nG [dead]\n")
 
-  
-    
+    def test_solve_19(self):
+        r = StringIO("A Madrid Hold\nB Berlin Support A\nC Cairo Support A\nD Detroit Support E\nE ElPaso Move Madrid\n")
+        w = StringIO()
+        diplomacy_solve(r,w)
+        self.assertEqual(w.getvalue(), "A Madrid\nB Berlin\nC Cairo\nD Detroit\nE [dead]\n")
+
+    def test_solve_20(self):
+        r = StringIO("A Madrid Hold\nB Berlin Move Cairo\nC Cairo Move Detroit\n")
+        w = StringIO()
+        diplomacy_solve(r,w)
+        self.assertEqual(w.getvalue(), "A Madrid\nB Cairo\nC Detroit\n")
+
+        
 if __name__ == "__main__": #pragma: no cover
     main()

@@ -1,21 +1,15 @@
-commit ba8a36c2029655ac21b948eef2b4513f223297d1
-Merge: 5ebe5d2 8f7794e
+commit 184fcdb3ee65589875b64f47ed826bbf8ef0e438
+Merge: ba180b3 96afb89
 Author: Florencia Froebel <florencia.froebel@gmail.com>
-Date:   Sun Jul 12 20:00:25 2020 -0500
+Date:   Tue Jul 14 01:17:28 2020 -0500
 
-    Merge branch 'master' of https://gitlab.com/tancy/diplomacy
+    Merge branch 'dev'
 
-commit 5ebe5d27b006ffd3528323baa922f511e82b0dba
+commit 96afb89fb3510b2b15eda881589c0d0c25f69670
 Author: Florencia Froebel <florencia.froebel@gmail.com>
-Date:   Sun Jul 12 19:59:04 2020 -0500
+Date:   Tue Jul 14 01:14:54 2020 -0500
 
-    Modified makefile to fix pipeling on master branch
-
-commit 8f7794efe891d377d80fa8d5196d31c596c16ca3
-Author: Cindy Tan <ctan@utexas.edu>
-Date:   Sun Jul 12 19:54:18 2020 -0500
-
-    debugging pipeline
+    Updated TestDiplomacy.out
 
 commit cf2931b528a8aef103b754f5865013c4f5fa4584
 Merge: 8f8b7ab f850ebc
@@ -55,6 +49,13 @@ Date:   Mon Jul 13 20:05:07 2020 -0500
 
     fixed corner cases, added 2 acceptance tests
 
+commit ba180b3d2bc4e8830b0eda0d9bd59d16e182ab8e
+Merge: a67a874 3fabef2
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Mon Jul 13 15:54:20 2020 -0500
+
+    Merge branch 'dev'
+
 commit 3fabef24d5cb44593efa7cf886b9866265c03b28
 Author: Florencia Froebel <florencia.froebel@gmail.com>
 Date:   Mon Jul 13 15:35:31 2020 -0500
@@ -90,6 +91,31 @@ Author: Florencia Froebel <florencia.froebel@gmail.com>
 Date:   Sun Jul 12 20:17:04 2020 -0500
 
     Changing the makefile to see if pipeline will fail on dev branch
+
+commit a67a8745d0eb1612fdf681770a64e3a615c0276e
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 20:02:06 2020 -0500
+
+    Updating Diplomacy.log
+
+commit ba8a36c2029655ac21b948eef2b4513f223297d1
+Merge: 5ebe5d2 8f7794e
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 20:00:25 2020 -0500
+
+    Merge branch 'master' of https://gitlab.com/tancy/diplomacy
+
+commit 5ebe5d27b006ffd3528323baa922f511e82b0dba
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Sun Jul 12 19:59:04 2020 -0500
+
+    Modified makefile to fix pipeling on master branch
+
+commit 8f7794efe891d377d80fa8d5196d31c596c16ca3
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Sun Jul 12 19:54:18 2020 -0500
+
+    debugging pipeline
 
 commit 2255fcb290cf0a533f9901e2adf84ccdc64ae134
 Author: Cindy Tan <ctan@utexas.edu>
