@@ -104,7 +104,11 @@ check:
 clean:
 	rm -f  .coverage
 	rm -f  *.pyc
-	rm -f  RunDiplomacy.tmp
+	rm -f  RunDiplomacy1.tmp
+	rm -f  RunDiplomacy2.tmp
+	rm -f  RunDiplomacy3.tmp
+	rm -f  RunDiplomacy4.tmp
+	rm -f  RunDiplomacy5.tmp
 	rm -f  TestDiplomacy.tmp
 	rm -rf __pycache__
 	rm -rf cs330e-Diplomacy-tests

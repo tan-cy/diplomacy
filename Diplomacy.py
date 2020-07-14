@@ -12,10 +12,18 @@ def diplomacy_read(s):
     return a list of 3 strings: army name, city name, and action 
     """
     a = s.split()
+    b = []
+
+    if a == []:
+        pass
     
-    b = [a[0], a[1], a[2]]
-    if len(a) == 4:
-        b.append(a[3])
+    elif len(a) == 4:
+        b = [a[0], a[1], a[2], a[3]]
+
+    else:
+        b = [a[0], a[1], a[2]]
+
+        
     return b
 
         
@@ -59,7 +67,7 @@ def diplomacy_find_supported(l, d):
 
 def diplomacy_find_supporters(l, d):
     """
-    returns a dictionary of all armies and their supporters {army : army they are supporting} 
+    returns a dictionary of an army and who it supports {army : army they are supporting} 
     l is a list of strings : ["A", "Barcelona", "Support", "B"]
     """
     if d == {}:
@@ -76,7 +84,7 @@ def diplomacy_find_supporters(l, d):
 
 def diplomacy_find_start(l, d):
     """
-    returns a dictionary of starting city for an army {army:starting city}
+    returns a dictionary of the starting city for an army {army : starting city}
     l is a list of strings : ["A", "Barcelona", "Support", "B"]
     """
     if d == {}:
@@ -124,12 +132,20 @@ def diplomacy_attacked(attackers, current):
 # ------------------
 def diplomacy_compare(attacked, attackers, army, opp_army, supported, supporters, current):
     """
+    attacked is a dictionary {army : [list of armies attacking them]}
+    attackers is a dictionary {army : city it is attacking}
+    army is the defending army
+    opp_army is the opposing army
+    supported is a dictionary {army : # of support}
+    supporters is a dictionary {army : army they support}
+    current is a dictionary {army : current location}
     returns supported, supporters, current after comparing supporting armies
     """
 
     if army in supporters:
         supported[supporters.get(army)] -= 1
         supporters.pop(army)
+       
 
     opp_supp = supported.get(opp_army)
     army_supp = supported.get(army)
@@ -145,60 +161,137 @@ def diplomacy_compare(attacked, attackers, army, opp_army, supported, supporters
 
             
     else:
-
-        if (army in attacked) and (army in attackers):
-            current.update({army: '[dead]'})
-            current.update({opp_army:attackers.get(opp_army)})
-        
-        else:
-            current.update({opp_army: '[dead]'})
-            current.update({army: '[dead]'})
+        current.update({opp_army: '[dead]'})
+        current.update({army: '[dead]'})
 
     return supported, supporters, current
 
 
-# -------------
+# -----------
+# find_winner
+# -----------
+
+def find_winner(d, current, attackers, supporters, supported):
+    """
+    d is a list of armies wanting to be in the same location
+    current is a dictionary {army : current location}
+    attackers is a dictionary {attacking army : city it is attacking}
+    supported is a dictionary {army : number of supporters}
+    supporters is a dictionary {army : army they are supporting}
+    returns an updated version of current
+    """
+    support_lst = []
+
+    for army in d:
+        support_lst.append(supported[army])
+
+    maximum = max(support_lst)
+    count = 0
+
+    for army in d:
+        
+        if supported.get(army) == maximum:
+           count += 1
+
+        if count > 1: 
+            for army in d:
+                current.update({army : '[dead]'})
+            
+            return current
+
+    for army in d:
+    
+        if supported.get(army) == maximum:
+        
+            if army in attackers:
+                current.update({army : attackers.get(army)})
+            else:
+                pass
+            
+        else:
+    
+            current.update({army : '[dead]'})
+
+
+    return current
+        
+#---------------
 # diplomacy_eval
-# -------------
+#---------------
 
-
-def diplomacy_eval(supported, supporters, attacked, attackers, current):
+def diplomacy_eval(moved, supported, supporters, attacked, attackers, current):
 
     """
+    moved is a dictionary {city : [list of armies that want to be in this location]}
     supported is a dictionary {army : # of support}
     supporters is a dictionary {army : army they support}
     attacked is a dictionary {army : [list of armies attacking them]}
     attackers is a dictionary {army : city it is attacking}
     current is a dictionary {army : current location}
-    returns a dictionary with {army : final location}
+    returns an updated version of current
     """
-    for army in attacked:
+    d = {}
         
+    for army in attacked:
         if army in supporters:
+            for opp_army in attacked.get(army):
+                supported, supporters, current = diplomacy_compare(attacked, attackers, army, opp_army, supported, supporters, current)
+                
 
-            for opp_army in attacked.get(army):
-                supported, supporters, current = diplomacy_compare(attacked,attackers,army, opp_army, supported, supporters, current)
-                
-    for army in attacked:
-        
-        if current.get(army) == '[dead]':
-            
-            for opp_army in attacked.get(army):
-                if current.get(opp_army) != '[dead]':
-                    current.update({opp_army:attackers.get(opp_army)})
-                
-                
-        else:
-            for opp_army in attacked.get(army):
-                supported, supporters, current = diplomacy_compare(attacked, attackers,army, opp_army, supported, supporters, current)               
-    
+    for city in moved:
+        lst_armies = moved.get(city)  
+        current = find_winner(lst_armies, current, attackers, supporters, supported)
+
     return current
 
+    
 
-# -------------
+# ------------
+# moved_armies
+# ------------
+
+def moved_armies(l, moved, armies):
+    """
+    l is a list of strings ['A', 'Madrid', 'Hold']
+    moved is a dictionary { city : [list of armies that want to be in this location] }
+    armies is a list that hold the cities that want to be in a specific city
+    returns moved
+    """
+
+    if l[2] == 'Move':
+        
+        if moved == {}:
+            armies = [l[0]]
+            moved = {l[3] : armies}
+
+        elif l[3] in moved:
+            armies = moved.get(l[3]) + [l[0]]
+            moved.update({l[3] : armies})
+
+        else:
+            armies = [l[0]]
+            moved.update({l[3] : armies})
+
+
+    elif l[2] == 'Hold' or l[2] == 'Support':
+        
+        if moved == {}:
+            armies = [l[0]]
+            moved = {l[1] : armies}
+
+        elif l[1] in moved:
+            armies = moved.get(l[1]) + [l[0]]
+            moved.update({l[1] : armies})
+
+        else:
+            armies = [l[0]]
+            moved.update({l[1] : armies})
+            
+    return moved, armies
+        
+# ---------------
 # diplomacy_solve
-# -------------
-
+# ---------------
 
 def diplomacy_solve(r, w):
     """
@@ -209,10 +302,18 @@ def diplomacy_solve(r, w):
     supporters = {}
     attackers = {}
     current = {}
+    moved = {}
+    armies = []
 
     for s in r:
         l = diplomacy_read(s)
-        current = diplomacy_find_start(l, current)
+
+        if l == []:
+            break
+        
+        current = diplomacy_find_start(l, current) # dict {army : current location}
+        moved, armies = moved_armies(l,moved, armies)
+        
         if (len(l) > 3) and (l[2] == "Move"):
             attackers.update({l[0]:l[3]}) # army name : city attacking
         elif (len(l) > 3) and (l[2] == "Support"):
@@ -223,20 +324,16 @@ def diplomacy_solve(r, w):
     # updates supported for armies with 0 supporters     
     for army in current:
         if army not in supported:
-        
             supported.update({army:0})
 
-            
-    attacked = diplomacy_attacked(attackers, current)
-
+    attacked = diplomacy_attacked(attackers, current) # dict {army : [list of attackers]}
+    
+    
     # finds solution after move    
-    solutions = diplomacy_eval(supported, supporters, attacked, attackers, current)
+    solutions = diplomacy_eval(moved, supported, supporters, attacked, attackers, current)
     sorted_solutions = sorted(solutions.items())
     
     for solution in sorted_solutions:
         armyName = solution[0]
         location = solution[1]
         diplomacy_print(w, armyName, location)
-
-
-
