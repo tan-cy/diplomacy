@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+
+# ----------------------------------
+# projects/diplomacy/RunDiplomacy.py
+# Copyright (C) 2016
+# Glenn P. Downing
+# ----------------------------------
+
 # -------
 # imports
 # -------
