@@ -1,3 +1,9 @@
+commit fdaa8a30f1051856d06c4e11829d932d4762e488
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Tue Jul 14 12:35:43 2020 -0500
+
+    added pre and post conditions, optimized solution
+
 commit 1351d19aed4f67486eff2705a9ee70e74269c1a1
 Author: Florencia Froebel <florencia.froebel@gmail.com>
 Date:   Tue Jul 14 09:03:21 2020 -0500
