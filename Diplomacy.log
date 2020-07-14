@@ -1,3 +1,9 @@
+commit 1351d19aed4f67486eff2705a9ee70e74269c1a1
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Tue Jul 14 09:03:21 2020 -0500
+
+    Updated TestDiplomacy.out since we added two unit tests
+
 commit f7f912c65bb272a1436ad9ba3c855a40f0fb5a9b
 Author: Florencia Froebel <florencia.froebel@gmail.com>
 Date:   Tue Jul 14 09:00:38 2020 -0500

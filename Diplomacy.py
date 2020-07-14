@@ -13,17 +13,10 @@ def diplomacy_read(s):
     """
     a = s.split()
     b = []
-
-    if a == []:
-        pass
-    
-    elif len(a) == 4:
+    if len(a) == 4:
         b = [a[0], a[1], a[2], a[3]]
-
     else:
         b = [a[0], a[1], a[2]]
-
-        
     return b
 
         
@@ -52,7 +45,7 @@ def diplomacy_find_supported(l, d):
     returns a dictionary of the number of supports for each army {army : number of supporters}
     l is a list of strings : ["A", "Barcelona", "Support", C"]
     """
-
+    assert l[2] == "Support"
     if l[3] in d:
        d.update({l[3]: d.get(l[3]) + 1})
     else:
@@ -70,6 +63,7 @@ def diplomacy_find_supporters(l, d):
     returns a dictionary of an army and who it supports {army : army they are supporting} 
     l is a list of strings : ["A", "Barcelona", "Support", "B"]
     """
+    assert l[2] == "Support"
     if d == {}:
         d = {l[0]: l[3]}
     else:
@@ -202,14 +196,9 @@ def find_winner(d, current, attackers, supporters, supported):
     for army in d:
     
         if supported.get(army) == maximum:
-        
             if army in attackers:
-                current.update({army : attackers.get(army)})
-            else:
-                pass
-            
+                current.update({army : attackers.get(army)})            
         else:
-    
             current.update({army : '[dead]'})
 
 
@@ -273,7 +262,7 @@ def moved_armies(l, moved, armies):
             moved.update({l[3] : armies})
 
 
-    elif l[2] == 'Hold' or l[2] == 'Support':
+    else: # if Support or Hold
         
         if moved == {}:
             armies = [l[0]]
@@ -305,14 +294,15 @@ def diplomacy_solve(r, w):
     moved = {}
     armies = []
 
+    num_armies = 0
     for s in r:
         l = diplomacy_read(s)
-
-        if l == []:
-            break
-        
+        assert len(l) < 5
+        assert len(l) > 2
         current = diplomacy_find_start(l, current) # dict {army : current location}
         moved, armies = moved_armies(l,moved, armies)
+        
+        num_armies +=1
         
         if (len(l) > 3) and (l[2] == "Move"):
             attackers.update({l[0]:l[3]}) # army name : city attacking
@@ -332,6 +322,8 @@ def diplomacy_solve(r, w):
     # finds solution after move    
     solutions = diplomacy_eval(moved, supported, supporters, attacked, attackers, current)
     sorted_solutions = sorted(solutions.items())
+    
+    assert len(sorted_solutions) == num_armies # solution has number of inputs
     
     for solution in sorted_solutions:
         armyName = solution[0]
