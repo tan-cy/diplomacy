@@ -1,3 +1,28 @@
+commit 920013687fca68bea01e3c2f7f96ee1ccc55cc0a
+Merge: 3fabef2 e8fd0d4
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Tue Jul 14 01:05:36 2020 -0500
+
+    Merge branch 'work' into dev
+
+commit e8fd0d4a9444dcb9309c0fa51df480640f0c5a69
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Tue Jul 14 00:49:41 2020 -0500
+
+    Fixed acceptance test issue that occurred with our new implementation of Diplomacy.py
+
+commit e96c999d83022b0a815ed2d24bd3447995533856
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Mon Jul 13 23:46:22 2020 -0500
+
+    implemented a different solution for diplomacy.py
+
+commit 3fabef24d5cb44593efa7cf886b9866265c03b28
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Mon Jul 13 15:35:31 2020 -0500
+
+    Fixed the makefile and will push to confirm successful build on GitLab
+
 commit 36b7d5798e5da6a5dbed87d5edc42e765de06f73
 Author: Florencia Froebel <florencia.froebel@gmail.com>
 Date:   Mon Jul 13 15:27:51 2020 -0500
@@ -21,12 +46,6 @@ Author: Cindy Tan <ctan@utexas.edu>
 Date:   Sun Jul 12 20:30:35 2020 -0500
 
     fixed corner case
-
-commit e96c999d83022b0a815ed2d24bd3447995533856
-Author: Florencia Froebel <florencia.froebel@gmail.com>
-Date:   Mon Jul 13 23:46:22 2020 -0500
-
-    implemented a different solution for diplomacy.py
 
 commit 5292bd1e45ee024f2a47ae517a703d13f97a4f00
 Author: Florencia Froebel <florencia.froebel@gmail.com>
