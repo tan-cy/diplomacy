@@ -144,14 +144,15 @@ def diplomacy_compare(attacked, attackers, army, opp_army, supported, supporters
 
             
     else:
-
+        """
         if (army in attacked) and (army in attackers):
             current.update({army: '[dead]'})
             current.update({opp_army:attackers.get(opp_army)})
         
         else:
-            current.update({opp_army: '[dead]'})
-            current.update({army: '[dead]'})
+        """
+        current.update({opp_army: '[dead]'})
+        current.update({army: '[dead]'})
 
     return supported, supporters, current
 
@@ -170,27 +171,37 @@ def diplomacy_eval(supported, supporters, attacked, attackers, current):
     attackers is a dictionary {army : city it is attacking}
     current is a dictionary {army : current location}
     returns a dictionary with {army : final location}
-    """
+    """            
+    invalid_attacked = []
+    new_attacked = {}
     for army in attacked:
-        
         if army in supporters:
-
             for opp_army in attacked.get(army):
                 supported, supporters, current = diplomacy_compare(attacked,attackers,army, opp_army, supported, supporters, current)
-                
-    for army in attacked:
+        elif army in attackers:
+            for opp_army in current: 
+                if attackers.get(army) == current.get(opp_army):
+                    if opp_army not in attackers:
+                        supported, supporters, current = diplomacy_compare(attacked,attackers,opp_army, army, supported, supporters, current)
+                        if len(attacked.get(army)) > 1:
+                            new_attacked.update({attacked.get(army)[0]: attacked.get(army)[1:]})
+                        else:
+                            uncontested_army = attacked.get(army)[0]
+                            invalid_attacked.append(army)
+                            current.update({uncontested_army: attackers.get(uncontested_army)})
+    
+    for i in invalid_attacked:
+        attacked.pop(i)
+    attacked.update(new_attacked)    
         
+    for army in attacked:
         if current.get(army) == '[dead]':
-            
             for opp_army in attacked.get(army):
                 if current.get(opp_army) != '[dead]':
-                    current.update({opp_army:attackers.get(opp_army)})
-                
-                
+                    current.update({opp_army:attackers.get(opp_army)})   
         else:
             for opp_army in attacked.get(army):
                 supported, supporters, current = diplomacy_compare(attacked, attackers,army, opp_army, supported, supporters, current)               
-    
     return current
 
 
@@ -227,6 +238,17 @@ def diplomacy_solve(r, w):
 
             
     attacked = diplomacy_attacked(attackers, current)
+    
+    # checks for armies attacking unoccupied cities
+    held_cities = current.values()
+    for army in attackers: 
+        if attackers.get(army) not in held_cities:
+            current.update({army: attackers.get(army)})
+            if army in attacked:
+                if len(attacked.get(army)) > 1:
+                    attacked.update({attacked.get(army)[0]:attacked.get(army)[1:]})
+                attacked.pop(army)
+
 
     # finds solution after move    
     solutions = diplomacy_eval(supported, supporters, attacked, attackers, current)

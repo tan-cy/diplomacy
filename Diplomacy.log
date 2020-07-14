@@ -1,3 +1,9 @@
+commit 3fabef24d5cb44593efa7cf886b9866265c03b28
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Mon Jul 13 15:35:31 2020 -0500
+
+    Fixed the makefile and will push to confirm successful build on GitLab
+
 commit 36b7d5798e5da6a5dbed87d5edc42e765de06f73
 Author: Florencia Froebel <florencia.froebel@gmail.com>
 Date:   Mon Jul 13 15:27:51 2020 -0500
