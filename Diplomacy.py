@@ -67,7 +67,7 @@ def diplomacy_find_supported(l, d):
 
 def diplomacy_find_supporters(l, d):
     """
-    returns a dictionary of all armies and their supporters {army : army they are supporting} 
+    returns a dictionary of an army and who it supports {army : army they are supporting} 
     l is a list of strings : ["A", "Barcelona", "Support", "B"]
     """
     if d == {}:
@@ -84,7 +84,7 @@ def diplomacy_find_supporters(l, d):
 
 def diplomacy_find_start(l, d):
     """
-    returns a dictionary of starting city for an army {army:starting city}
+    returns a dictionary of the starting city for an army {army : starting city}
     l is a list of strings : ["A", "Barcelona", "Support", "B"]
     """
     if d == {}:
@@ -131,6 +131,13 @@ def diplomacy_attacked(attackers, current):
 # ------------------
 def diplomacy_compare(attacked, attackers, army, opp_army, supported, supporters, current):
     """
+    attacked is a dictionary {army : [list of armies attacking them]}
+    attackers is a dictionary {army : city it is attacking}
+    army is the defending army
+    opp_army is the opposing army
+    supported is a dictionary {army : # of support}
+    supporters is a dictionary {army : army they support}
+    current is a dictionary {army : current location}
     returns supported, supporters, current after comparing supporting armies
     """
     
@@ -162,20 +169,25 @@ def diplomacy_compare(attacked, attackers, army, opp_army, supported, supporters
     return supported, supporters, current
 
 
-# -------------
-# diplomacy_eval
-# -------------
+# -----------
+# find_winner
+# -----------
 
 def find_winner(d, current, attackers, supporters, supported):
     """
-    d is a dictionary {army : number of support}
+    d is a list of armies wanting to be in the same location
+    current is a dictionary {army : current location}
+    attackers is a dictionary {attacking army : city it is attacking}
+    supported is a dictionary {army : number of supporters}
+    supporters is a dictionary {army : army they are supporting}
+    returns an updated version of current
     """
-    supp_lst = []
+    support_lst = []
 
     for army in d:
-        supp_lst.append(supported[army])
+        support_lst.append(supported[army])
 
-    maximum = max(supp_lst)
+    maximum = max(support_lst)
     count = 0
 
     for army in d:
@@ -183,7 +195,7 @@ def find_winner(d, current, attackers, supporters, supported):
         if supported.get(army) == maximum:
            count += 1
 
-        if count > 1:
+        if count > 1: 
             for army in d:
                 current.update({army : '[dead]'})
             
@@ -197,6 +209,7 @@ def find_winner(d, current, attackers, supporters, supported):
                 current.update({army : attackers.get(army)})
             else:
                 pass
+            
         else:
     
             current.update({army : '[dead]'})
@@ -204,16 +217,20 @@ def find_winner(d, current, attackers, supporters, supported):
 
     return current
         
+#---------------
+# diplomacy_eval
+#---------------
 
 def diplomacy_eval(moved, supported, supporters, attacked, attackers, current):
 
     """
+    moved is a dictionary {city : [list of armies that want to be in this location]}
     supported is a dictionary {army : # of support}
     supporters is a dictionary {army : army they support}
     attacked is a dictionary {army : [list of armies attacking them]}
     attackers is a dictionary {army : city it is attacking}
     current is a dictionary {army : current location}
-    returns a dictionary with {army : final location}
+    returns an updated version of current
     """
     d = {}
 
@@ -233,14 +250,15 @@ def diplomacy_eval(moved, supported, supporters, attacked, attackers, current):
 
     
 
-# -------------
-# diplomacy_solve
-# -------------
+# ------------
+# moved_armies
+# ------------
 
-def m(l, moved, armies):
+def moved_armies(l, moved, armies):
     """
     l is a list of strings ['A', 'Madrid', 'Hold']
-    moved is a dictionary { city : [list of armies that are in this location] }
+    moved is a dictionary { city : [list of armies that want to be in this location] }
+    armies is a list that hold the cities that want to be in a specific city
     returns moved
     """
 
@@ -275,7 +293,9 @@ def m(l, moved, armies):
             
     return moved, armies
         
-
+# ---------------
+# diplomacy_solve
+# ---------------
 
 def diplomacy_solve(r, w):
     """
@@ -294,8 +314,10 @@ def diplomacy_solve(r, w):
 
         if l == []:
             break
-        current = diplomacy_find_start(l, current)
-        moved, armies = m(l,moved, armies)
+        
+        current = diplomacy_find_start(l, current) # dict {army : current location}
+        moved, armies = moved_armies(l,moved, armies)
+        
         if (len(l) > 3) and (l[2] == "Move"):
             attackers.update({l[0]:l[3]}) # army name : city attacking
         elif (len(l) > 3) and (l[2] == "Support"):
@@ -306,34 +328,18 @@ def diplomacy_solve(r, w):
     # updates supported for armies with 0 supporters     
     for army in current:
         if army not in supported:
-        
             supported.update({army:0})
-
             
-    attacked = diplomacy_attacked(attackers, current)
+    attacked = diplomacy_attacked(attackers, current) # dict {army : [list of attackers]}
     
     
     
     # finds solution after move    
     solutions = diplomacy_eval(moved, supported, supporters, attacked, attackers, current)
-    #print('answer',solutions)
-    
     sorted_solutions = sorted(solutions.items())
     
     for solution in sorted_solutions:
         armyName = solution[0]
         location = solution[1]
         diplomacy_print(w, armyName, location)
-"""
-def main():
-    r = StringIO('A Madrid Hold\nB Paris Move London\nC London Move Madrid\n' \
-                 'D Barcelona Support B\nE HongKong Hold\nF Venice Move Lyon\n' \
-                 'G Lyon Move HongKong\nH Yemin Support E\nI Austin Hold\n' \
-                 'J Houston Move Dallas\nK Dallas Move Austin \nL Pasadena Support K\n' \
-                 'M HongKong Move Perdu\n')
-    w = StringIO()
-    diplomacy_solve(r,w)
 
-main()
-"""   
- 

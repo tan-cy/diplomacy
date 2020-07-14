@@ -10,7 +10,8 @@ from unittest import main, TestCase
 
 from Diplomacy import diplomacy_read, diplomacy_print, diplomacy_solve, \
     diplomacy_eval, diplomacy_find_supported, diplomacy_find_supporters, \
-    diplomacy_compare, diplomacy_find_start, diplomacy_attacked
+    diplomacy_compare, diplomacy_find_start, diplomacy_attacked, find_winner, \
+    moved_armies
 
 # --------------
 # TestDiplomacy
@@ -95,11 +96,12 @@ class TestDiplomacy(TestCase):
         z = diplomacy_find_supporters(l,d)
         self.assertEqual(z, {"B": "D", "A": "C"})
 
+
     # --------------------
     # diplomacy_find_start
     # --------------------
 
-    def test_find_start1(self):
+    def test_find_start_1(self):
         l = ["A", "Austin" ,"Support", "B"]
         d = {}
         answer = diplomacy_find_start(l, d)
@@ -109,25 +111,25 @@ class TestDiplomacy(TestCase):
     # diplomacy_attacked
     # ------------------
 
-    def test_attacked1(self):
+    def test_attacked_1(self):
         attackers = {'A':'Madrid', 'C':'Madrid', 'E':'Houston'}
         current = {'A':'Austin', 'B':'Madrid', 'C':'Houston', 'D':'NewYork', 'E':'Detroit'}
         answer = diplomacy_attacked(attackers, current)
         self.assertEqual(answer, {'B':['A','C'], 'C':['E']})
 
-    def test_attacked2(self):
+    def test_attacked_2(self):
         attackers = {'A': 'Madrid', 'C':'Madrid', 'D':'Madrid', 'E':'Houston', 'G':'Houston', 'H':'NewYork'}
         current = {'A':'Austin', 'B':'Madrid', 'C':'Cairo', 'D':'Houston', 'E':'Tomball', 'F':'NewYork','G':'LaPaz','H':'Tarija'}
         answer = diplomacy_attacked(attackers, current)
         self.assertEqual(answer, {'B':['A','C','D'], 'D':['E','G'], 'F':['H']})
 
-    def test_attacked3(self):
+    def test_attacked_3(self):
         attackers = {}
         current = {'A':'Austin','B':'Madrid', 'C':'Cairo'}
         answer = diplomacy_attacked(attackers, current)
         self.assertEqual(answer, {})
     
-    def test_attacked4(self):
+    def test_attacked_4(self):
         attackers = {'B':'Madrid', 'D':'London'}
         current = {'A':'Madrid','B':'London', 'C':'Berlin', 'D':'Detroid'}
         answer = diplomacy_attacked(attackers, current)
@@ -170,9 +172,32 @@ class TestDiplomacy(TestCase):
         answer = diplomacy_compare(attacked, attackers, army, opp_army, supported, supporters, current)
         self.assertEqual(answer, ({'A':0, 'D':0}, {}, {'A':'[dead]', 'B':'Berlin', 'C':'Cairo', 'D':'[dead]'}))
     
-    # -----
-    # solve
-    # -----
+    # -----------
+    # find_winner
+    # -----------
+    def test_find_winner_1(self):
+        d = ['A', 'B', 'C']
+        current = {'A':'Austin', 'B':'Berlin', 'C':'Cairo'}
+        attackers = {'B':'Austin', 'C':'Austin'}
+        supported = {'A':0, 'B':0, 'C':0}
+        supporters = {}
+        answer = find_winner(d, current, attackers, supporters, supported)
+        self.assertEqual(answer, {'A':'[dead]', 'B':'[dead]', 'C':'[dead]'})
+
+    def test_find_winner_2(self):
+        d = ['A']
+        current = {'A':'Austin'}
+        attackers = {}
+        supported = {'A':0}
+        supporters = {}
+        answer = find_winner(d, current, attackers, supporters, supported)
+        self.assertEqual(answer, {'A':'Austin'})
+    
+
+    
+    # ---------------
+    # diplomacy_solve
+    # ---------------
 
     def test_solve_1(self):
         r = StringIO("A Madrid Hold\nB London Support A\nC Berlin Support A\nD Austin Support E\nE Houston Move Madrid\n")

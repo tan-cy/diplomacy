@@ -78,7 +78,7 @@ RunDiplomacy5.tmp: RunDiplomacy5.in RunDiplomacy5.out RunDiplomacy.py
 	diff --strip-trailing-cr RunDiplomacy5.tmp RunDiplomacy5.out
 
 TestDiplomacy.tmp: TestDiplomacy.py
-	$(COVERAGE) run    --branch TestDiplomacy.py 
+	$(COVERAGE) run    --branch TestDiplomacy.py > TestDiplomacy.tmp 2>&1
 	$(COVERAGE) report -m                      >> TestDiplomacy.tmp
 	cat TestDiplomacy.tmp
 

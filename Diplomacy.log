@@ -1,3 +1,9 @@
+commit e96c999d83022b0a815ed2d24bd3447995533856
+Author: Florencia Froebel <florencia.froebel@gmail.com>
+Date:   Mon Jul 13 23:46:22 2020 -0500
+
+    implemented a different solution for diplomacy.py
+
 commit 5292bd1e45ee024f2a47ae517a703d13f97a4f00
 Author: Florencia Froebel <florencia.froebel@gmail.com>
 Date:   Sun Jul 12 20:17:04 2020 -0500
