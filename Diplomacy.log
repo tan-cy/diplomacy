@@ -1,3 +1,9 @@
+commit 92e1572559b6d030cba5c43a164580a807fe33a4
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Tue Jul 14 12:40:27 2020 -0500
+
+    fixed TestDiplomacy.out, fixed makefile
+
 commit fdaa8a30f1051856d06c4e11829d932d4762e488
 Author: Cindy Tan <ctan@utexas.edu>
 Date:   Tue Jul 14 12:35:43 2020 -0500
