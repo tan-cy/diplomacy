@@ -1,3 +1,9 @@
+commit d4e3876a92347633edf46ed50e26cae64cfdc75c
+Author: Cindy Tan <ctan@utexas.edu>
+Date:   Wed Jul 15 13:26:49 2020 -0500
+
+    updated makefile for public repo, confirmed successes
+
 commit e1084d2ed7618605c74e04cdc3180f49a37fc01d
 Author: Cindy Tan <ctan@utexas.edu>
 Date:   Wed Jul 15 10:32:36 2020 -0500
