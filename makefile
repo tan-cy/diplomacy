@@ -17,11 +17,18 @@ FILES :=                              \
     RunDiplomacy.py                     \
     TestDiplomacy.out                   \
     TestDiplomacy.py					  \
-#	cs330e-Diplomacy-tests/tancy-RunDiplomacy.in   \
-#	cs330e-Diplomacy-tests/tancy-RunDiplomacy.out  \
-#	cs330e-Diplomacy-tests/tancy-TestDiplomacy.out \
-#	cs330e-Diplomacy-tests/tancy-TestDiplomacy.py  \
-#	cs330e-Diplomacy-tests/tancy-TestDiplomacy.py  \
+	cs330e-Diplomacy-tests/tancy-RunDiplomacy1.in   \
+	cs330e-Diplomacy-tests/tancy-RunDiplomacy1.out  \
+	cs330e-Diplomacy-tests/tancy-RunDiplomacy2.in   \
+	cs330e-Diplomacy-tests/tancy-RunDiplomacy2.out  \
+	cs330e-Diplomacy-tests/tancy-RunDiplomacy3.in   \
+	cs330e-Diplomacy-tests/tancy-RunDiplomacy3.out  \
+	cs330e-Diplomacy-tests/tancy-RunDiplomacy4.in   \
+	cs330e-Diplomacy-tests/tancy-RunDiplomacy4.out  \
+	cs330e-Diplomacy-tests/tancy-RunDiplomacy5.in   \
+	cs330e-Diplomacy-tests/tancy-RunDiplomacy5.out  \
+	cs330e-Diplomacy-tests/tancy-TestDiplomacy.out \
+	cs330e-Diplomacy-tests/tancy-TestDiplomacy.py  \
 
 
 ifeq ($(shell uname), Darwin)          # Apple
